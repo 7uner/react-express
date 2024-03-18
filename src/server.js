@@ -16,7 +16,7 @@ app.use('/api', router);
 app.use(express.static('dist/app'));
 
 // Handle client routing, return all requests to the app
-app.get('*', (_req, res) => {
+app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'app/index.html'));
 });
 
