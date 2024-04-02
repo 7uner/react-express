@@ -19,10 +19,22 @@ function Home() {
       Description: 'Last Gen, Just as Good, fraction of the price',
       link: '#',
     },
+    {
+      name: 'iPhone 14',
+      image: 'src/app/Assets/iPhone14.jpg',
+      Description: 'Last Gen, Just as Good, fraction of the price',
+      link: '#',
+    },
+    {
+      name: 'iPhone 14',
+      image: 'src/app/Assets/iPhone14.jpg',
+      Description: 'Last Gen, Just as Good, fraction of the price',
+      link: '#',
+    },
   ];
 
   function addToCart() {
-    alert('added to Carat!');
+    alert('added to Cart!');
   }
   return (
     <div>
@@ -37,7 +49,7 @@ function Home() {
           <ProductCarousel />
         </div>
         <div className="row">
-          <div className="col-12">
+          <div className="col-4">
             <ProductCard
               image={'src/app/Assets/MacBookPro.jpg'}
               ProductName={'Mac Book Pro 15th Gen'}
