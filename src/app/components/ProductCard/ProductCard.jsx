@@ -1,4 +1,10 @@
-function ProductCard({ image, ProductName, ProductDes, ProductPage }) {
+function ProductCard({
+  image,
+  ProductName,
+  ProductDes,
+  ProductPage,
+  addToCart,
+}) {
   return (
     <div className="card">
       <img
@@ -9,9 +15,14 @@ function ProductCard({ image, ProductName, ProductDes, ProductPage }) {
       <div className="card-body">
         <h5 className="card-title">{ProductName}</h5>
         <p className="card-text">{ProductDes}</p>
-        <a href={ProductPage} className="btn btn-primary">
-          See More
-        </a>
+        <div>
+          <a href={ProductPage} className="btn btn-primary m-2">
+            See More
+          </a>
+          <a onClick={addToCart} className="btn btn-primary m-2">
+            Add to Cart
+          </a>
+        </div>
       </div>
     </div>
   );

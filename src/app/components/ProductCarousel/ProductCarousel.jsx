@@ -3,13 +3,25 @@ function ProductCarousel() {
     <div id="carouselExample" className="carousel slide">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src="..." className="d-block w-100" alt="..." />
+          <img
+            src="src\app\Assets\apple_banner_1.jpg"
+            className="d-block w-100"
+            alt="..."
+          />
         </div>
         <div className="carousel-item">
-          <img src="..." className="d-block w-100" alt="..." />
+          <img
+            src="src\app\Assets\apple_banner_2.jpg"
+            className="d-block w-100"
+            alt="..."
+          />
         </div>
         <div className="carousel-item">
-          <img src="..." className="d-block w-100" alt="..." />
+          <img
+            src="src\app\Assets\apple_banner_3.jpg"
+            className="d-block w-100"
+            alt="..."
+          />
         </div>
       </div>
       <button
