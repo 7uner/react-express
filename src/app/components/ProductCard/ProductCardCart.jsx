@@ -3,7 +3,7 @@ function ProductCardCart({
   ProductName,
   ProductDes,
   ProductPage,
-  addToCart,
+  deleteItem,
 }) {
   return (
     <div className="card">
@@ -23,15 +23,19 @@ function ProductCardCart({
               <select
                 className="form-select w-25 h-75 align-self-center m-2"
                 aria-label="Default select example"
+                defaultValue={1}
               >
-                <option selected value="1">
-                  Qty: 1
-                </option>
+                <option value="1">Qty: 1</option>
                 <option value="2">Qty: 2</option>
                 <option value="3">Qty: 3</option>
                 <option value="4">Qty: 4</option>
               </select>
-              <a className="btn btn-primary m-2">Remove from Cart</a>
+              <a
+                className="btn btn-primary m-2"
+                onClick={() => deleteItem(ProductName)}
+              >
+                Remove from Cart
+              </a>
               <a className="btn btn-primary m-2">Save for Later</a>
               <a className="btn btn-primary m-2">Share</a>
             </div>

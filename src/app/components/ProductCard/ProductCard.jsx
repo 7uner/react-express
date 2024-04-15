@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 function ProductCard({
   image,
   ProductName,
@@ -5,6 +7,9 @@ function ProductCard({
   ProductPage,
   addToCart,
 }) {
+  //hook for disply of if aan item was already added to cart
+  const [added, setAdded] = useState(false);
+  console.log(addToCart);
   return (
     <div className="card">
       <img
@@ -19,8 +24,14 @@ function ProductCard({
           <a href={ProductPage} className="btn btn-primary m-2">
             See More
           </a>
-          <a onClick={addToCart} className="btn btn-primary m-2">
-            Add to Cart
+          <a
+            onClick={() => {
+              addToCart(ProductName);
+              setAdded(true);
+            }}
+            className="btn btn-primary m-2"
+          >
+            {added ? 'Added to cart!' : 'Add to Cart'}
           </a>
         </div>
       </div>

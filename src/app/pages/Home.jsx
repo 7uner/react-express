@@ -1,44 +1,42 @@
-import Welcome from '../components/Welcome/Welcome';
 import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
+import productList from '../data/productData';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function Home() {
-  const product = {
-    name: 'iPhone 14',
-    image: 'src/app/Assets/iPhone14.jpg',
-    Description: 'Last Gen, Just as Good, fraction of the price',
-    link: '#',
-  };
+  // location for perserving global data
+  const { state } = useLocation();
+  //hook for disply of no. of items in cart
+  const [NumCartItems, setNumCartItems] = useState(0);
+  //hook for cart item title display
+  const [show, setShow] = useState(true);
+  //hook for adding product to cart list
+  const [cart, setCart] = useState([]);
 
-  const productList = [
-    {
-      name: 'iPhone 14',
-      image: 'src/app/Assets/iPhone14.jpg',
-      Description: 'Last Gen, Just as Good, fraction of the price',
-      link: '#',
-    },
-    {
-      name: 'iPhone 14',
-      image: 'src/app/Assets/iPhone14.jpg',
-      Description: 'Last Gen, Just as Good, fraction of the price',
-      link: '#',
-    },
-    {
-      name: 'iPhone 14',
-      image: 'src/app/Assets/iPhone14.jpg',
-      Description: 'Last Gen, Just as Good, fraction of the price',
-      link: '#',
-    },
-  ];
+  // function handler to add product to cart
+  function handleAddToCart(ProductName) {
+    //add our item to the cart list, update state
 
-  function addToCart() {
-    alert('added to Cart!');
+    setCart([
+      ...cart,
+      productList.filter((obj) => {
+        return obj.name === ProductName;
+      })[0],
+    ]);
+    console.log(cart);
+    //alert('added to Cart!');
+    //call the usestate function here
+    setNumCartItems(NumCartItems + 1);
+    if (NumCartItems >= 5) {
+      setShow(false);
+    }
   }
   return (
     <div>
-      <NavBar />
+      <NavBar cartNum={NumCartItems} itemInCart={cart} />
       <div className="container text-center">
         <div className="row">
           <h1 className="display-2">
@@ -46,62 +44,12 @@ function Home() {
           </h1>
         </div>
         <div className="row">
+          <h1>
+            {show
+              ? 'You have ' + NumCartItems + ' items in cart!'
+              : 'You have a lot of items in cart!'}
+          </h1>
           <ProductCarousel />
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/MacBookPro.jpg'}
-              ProductName={'Mac Book Pro 15th Gen'}
-              ProductDes={
-                'Get the latest Mac Book Pro with the Powerful M2 Chip!'
-              }
-              ProductPage={'#'}
-              addToCart={addToCart}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/iPhone15Pro.webp'}
-              ProductName={'iPhone 15 Pro'}
-              ProductDes={'Get the latest iPhone 15 Pro!'}
-              ProductPage={'#'}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/iPad10th.jpg'}
-              ProductName={'iPhone 10th Gen'}
-              ProductDes={'Get the latest iPad 10th Gen!'}
-              ProductPage={'#'}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/AirPodsMax.jpg'}
-              ProductName={'Air Pods Max'}
-              ProductDes={'these wont fall out of your ears!'}
-              ProductPage={'#'}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={product.image}
-              ProductName={product.name}
-              ProductDes={product.Description}
-              ProductPage={product.link}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/AirPodsMax.jpg'}
-              ProductName={'Air Pods Max'}
-              ProductDes={'these wont fall out of your ears!'}
-              ProductPage={'#'}
-            />
-          </div>
         </div>
         <div className="row">
           {productList.map((product, i) => (
@@ -111,6 +59,7 @@ function Home() {
                 ProductName={product.name}
                 ProductDes={product.Description}
                 ProductPage={product.link}
+                addToCart={handleAddToCart}
               />
             </div>
           ))}
