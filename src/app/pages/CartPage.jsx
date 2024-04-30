@@ -1,4 +1,3 @@
-import Cart from '../components/Cart/Cart';
 import Footer from '../components/Footer/Footer';
 import ProductCardCart from '../components/ProductCard/ProductCardCart';
 import NavBar from '../components/NavBar/NavBar';

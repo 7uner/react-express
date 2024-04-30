@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function ProductCard({
   image,
@@ -6,10 +7,12 @@ function ProductCard({
   ProductDes,
   ProductPage,
   addToCart,
+  itemInCart,
+  cartNum,
 }) {
   //hook for disply of if aan item was already added to cart
   const [added, setAdded] = useState(false);
-  console.log(addToCart);
+  const navigate = useNavigate();
   return (
     <div className="card">
       <img
@@ -21,7 +24,12 @@ function ProductCard({
         <h5 className="card-title">{ProductName}</h5>
         <p className="card-text">{ProductDes}</p>
         <div>
-          <a href={ProductPage} className="btn btn-primary m-2">
+          <a
+            onClick={() => {
+              navigate('/product', { state: { itc: itemInCart, cn: cartNum } });
+            }}
+            className="btn btn-primary m-2"
+          >
             See More
           </a>
           <a

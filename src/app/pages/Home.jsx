@@ -10,16 +10,15 @@ function Home() {
   // location for perserving global data
   const { state } = useLocation();
   //hook for disply of no. of items in cart
-  const [NumCartItems, setNumCartItems] = useState(0);
+  const [NumCartItems, setNumCartItems] = useState(state ? state.cn : 0);
   //hook for cart item title display
   const [show, setShow] = useState(true);
   //hook for adding product to cart list
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(state ? state.itc : []);
 
   // function handler to add product to cart
   function handleAddToCart(ProductName) {
     //add our item to the cart list, update state
-
     setCart([
       ...cart,
       productList.filter((obj) => {
@@ -27,7 +26,6 @@ function Home() {
       })[0],
     ]);
     console.log(cart);
-    //alert('added to Cart!');
     //call the usestate function here
     setNumCartItems(NumCartItems + 1);
     if (NumCartItems >= 5) {
@@ -60,6 +58,8 @@ function Home() {
                 ProductDes={product.Description}
                 ProductPage={product.link}
                 addToCart={handleAddToCart}
+                itemInCart={state ? state.itc : []}
+                cartNum={state ? state.cn : 0}
               />
             </div>
           ))}
