@@ -35,9 +35,19 @@ const productList = [
       'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_8.jpg',
     ],
     options: {
-      Storage: ['256 GB', '512 GB', '1 TB'],
-      Colour: ['Silver', 'Space Black'],
-      Configuration: ['M3 Pro', 'M3 Max'],
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 300],
+        ['1 TB', 800],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Space Black', 100],
+      ],
+      Configuration: [
+        ['M3 Pro', 0],
+        ['M3 Max', 1000],
+      ],
     },
   },
   {

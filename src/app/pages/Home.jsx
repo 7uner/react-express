@@ -25,7 +25,6 @@ function Home() {
         return obj.name === ProductName;
       })[0],
     ]);
-    console.log(cart);
     //call the usestate function here
     setNumCartItems(NumCartItems + 1);
     if (NumCartItems >= 5) {
@@ -56,7 +55,7 @@ function Home() {
                 image={product.image}
                 ProductName={product.name}
                 ProductDes={product.Description}
-                ProductPage={product.link}
+                ProductID={product.id}
                 addToCart={handleAddToCart}
                 itemInCart={state ? state.itc : []}
                 cartNum={state ? state.cn : 0}

@@ -5,7 +5,7 @@ function ProductCard({
   image,
   ProductName,
   ProductDes,
-  ProductPage,
+  ProductID,
   addToCart,
   itemInCart,
   cartNum,
@@ -13,6 +13,7 @@ function ProductCard({
   //hook for disply of if aan item was already added to cart
   const [added, setAdded] = useState(false);
   const navigate = useNavigate();
+
   return (
     <div className="card">
       <img
@@ -26,7 +27,9 @@ function ProductCard({
         <div>
           <a
             onClick={() => {
-              navigate('/product', { state: { itc: itemInCart, cn: cartNum } });
+              navigate('/product1', {
+                state: { itc: itemInCart, cn: cartNum, id: ProductID },
+              });
             }}
             className="btn btn-primary m-2"
           >
