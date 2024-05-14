@@ -27,7 +27,7 @@ function ProductCard({
         <div>
           <a
             onClick={() => {
-              navigate('/product1', {
+              navigate('/product', {
                 state: { itc: itemInCart, cn: cartNum, id: ProductID },
               });
             }}
