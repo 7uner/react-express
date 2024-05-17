@@ -3,6 +3,8 @@ import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
+import ProductBar from '../components/NavBar/ProductBar';
+import Accordian from '../components/NavBar/Accordian';
 
 function Home() {
   const product = {
@@ -26,7 +28,9 @@ function Home() {
   }
   return (
     <div>
+      <Accordian />
       <NavBar />
+      <ProductBar />
       <div className="container text-center">
         <div className="row">
           <h1 className="display-2">

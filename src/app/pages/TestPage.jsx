@@ -2,10 +2,12 @@ import NavBar from '../components/NavBar/NavBar';
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
+import Accordian from '../components/NavBar/Accordian';
 
 function TestPage() {
   return (
     <div>
+      <Accordian />
       <NavBar />
       <ProductCarousel />
       <ProductCard
