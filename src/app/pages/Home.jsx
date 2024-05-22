@@ -7,8 +7,8 @@ import ProductBar from '../components/NavBar/ProductBar';
 import productList from '../data/productList';
 
 function Home() {
-  function addToCart() {
-    alert('added to Carat!');
+  function handleAddToCart() {
+    alert('added to Cart!');
   }
 
   return (
@@ -32,7 +32,7 @@ function Home() {
                 ProductDes={product.Description}
                 ProductName={product.name}
                 ProductPage={product.link}
-                addToCart={addToCart}
+                addToCart={handleAddToCart}
               />
             </div>
           ))}

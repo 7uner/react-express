@@ -6,7 +6,7 @@ function ProductCard({
   addToCart,
 }) {
   return (
-    <div className="card h-100 d-flex flex-direction: column justify-content-between">
+    <div className="card h-100 d-flex flex-column justify-content-between">
       <img
         src={image}
         className="card-img-top"
