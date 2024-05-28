@@ -18,12 +18,29 @@ function TestProductPage() {
   const [cart, setCart] = useState(state ? state.itc : []);
   // fetch an array of options, for mapping use
   const keyArray = Object.keys(product.options);
+  // options obj
+  var priceOptions = {};
+  // load the object with the date, to use for the option hook
+  keyArray.forEach((key) => (priceOptions[key] = 0));
+  // hook for price updates
+  const [price, setPrice] = useState(product.price);
+  // hook for keeping track of which options are chosen
+  const [prices, setPrices] = useState(priceOptions);
 
   // function handler to add product to cart
   function handleAddToCart() {
     setCart([...cart, product]);
     //call the usestate function here
     setNumCartItems(NumCartItems + 1);
+  }
+
+  // function to handle price change on option select
+  function handleOption() {
+    var total = product.price;
+    for (const option in priceOptions) {
+      total += prices[option];
+    }
+    setPrice(total);
   }
 
   return (
@@ -58,6 +75,10 @@ function TestProductPage() {
                               className="btn-check"
                               name={option}
                               id={choice[0]}
+                              onClick={() => {
+                                prices[option] = choice[1];
+                                handleOption();
+                              }}
                             />
                             <label
                               className="btn btn-outline-primary"
@@ -74,11 +95,9 @@ function TestProductPage() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <h2>${product.price}</h2>
+                  <h2>${price}</h2>
                   <h2>
-                    {product.price > 4000
-                      ? 'Free Shipping!'
-                      : '+ $9.99 Shipping'}
+                    {price > 4000 ? 'Free Shipping!' : '+ $9.99 Shipping'}
                   </h2>
                 </div>
                 <div className="col-6 d-flex justify-content-end align-items-center">
