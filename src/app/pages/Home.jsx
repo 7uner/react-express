@@ -31,7 +31,7 @@ function Home() {
       <Accordian />
       <NavBar />
       <ProductBar />
-      <div className="container text-center">
+      <div className="container d-flex allign-items-end">
         <div className="row">
           <h1 className="display-2">
             Find the Latest Tech for the Best Price!
@@ -97,12 +97,12 @@ function Home() {
         </div>
         <div className="row">
           {productList.map((product, i) => (
-            <div key={i} className="col-4">
+            <div className="col-4">
               <ProductCard
                 image={product.image}
-                ProductName={product.name}
                 ProductDes={product.Description}
-                ProductPage={product.link}
+                ProductName={product.name}
+                ProductPage={addToCart}
               />
             </div>
           ))}
