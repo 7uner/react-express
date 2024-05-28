@@ -1,197 +1,139 @@
+import Footer from '../components/Footer/Footer';
+import NavBar from '../components/NavBar/NavBar';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import NavBar from '../components/NavBar/NavBar';
-import Footer from '../components/Footer/Footer';
 import productList from '../data/productData';
 
 function ProductPage() {
+  // location for perserving global data
   const { state } = useLocation();
-  // hooks for product options
-  const [size, setSize] = useState(256);
-  const [color, setColour] = useState('Silver');
-  const [config, setConfig] = useState('Pro');
-  const [price, setPrice] = useState(3299.99);
+  // filter for the specific product from product List
+  // TODO: remember to check for null state later
   const product = productList.filter((obj) => {
-    return obj.id === '000';
+    return obj.id === state.id;
   })[0];
-  const gallery = [
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_1.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_2.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_3.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_4.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_5.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_6.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_7.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_8.jpg',
-  ];
+  //hook for disply of no. of items in cart
+  const [NumCartItems, setNumCartItems] = useState(state ? state.cn : 0);
+  //hook for adding product to cart list
+  const [cart, setCart] = useState(state ? state.itc : []);
+  // fetch an array of options, for mapping use
+  const keyArray = Object.keys(product.options);
+  // options obj
+  var priceOptions = {};
+  // load the object with the date, to use for the option hook
+  keyArray.forEach((key) => (priceOptions[key] = 0));
+  // hook for price updates
+  const [price, setPrice] = useState(product.price);
+  // hook for keeping track of which options are chosen
+  const [prices, setPrices] = useState(priceOptions);
+
+  // function handler to add product to cart
+  function handleAddToCart() {
+    setCart([...cart, product]);
+    //call the usestate function here
+    setNumCartItems(NumCartItems + 1);
+  }
+
+  // function to handle price change on option select
+  function handleOption() {
+    var total = product.price;
+    for (const option in priceOptions) {
+      total += prices[option];
+    }
+    setPrice(total);
+  }
+
   return (
     <div>
-      <NavBar
-        itemInCart={state ? state.ic : []}
-        cartNum={state ? state.cn : 0}
-      />
+      <NavBar itemInCart={cart} cartNum={NumCartItems} />
       <div className="container">
         <div className="row">
           <div className="col-6">
             <img className="w-100" src={product.image}></img>
           </div>
-          <div className="col-6 border">
+          <div className="col-6">
             <div className="container">
               <div className="row">
-                <div className="col border d-flex justify-content-center">
-                  <h1> Apple 2023 MacBook Pro</h1>
+                <div className="col d-flex justify-content-center">
+                  <h1>{product.name}</h1>
                 </div>
               </div>
-              <div className="row">
-                <div className="col border p-3 d-flex align-items-center justify-content-between">
-                  <h3 className="d-inline"> Storage Size:</h3>
-                  <div
-                    className="btn-group m-3"
-                    role="group"
-                    aria-label="Basic radio toggle button group"
-                  >
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btnradio"
-                      id="btnradio1"
-                    />
-                    <label class="btn btn-outline-primary" for="btnradio1">
-                      256 GB
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btnradio"
-                      id="btnradio2"
-                    />
-                    <label class="btn btn-outline-primary" for="btnradio2">
-                      512 GB
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btnradio"
-                      id="btnradio3"
-                    />
-                    <label class="btn btn-outline-primary" for="btnradio3">
-                      1 TB
-                    </label>
+              <div>
+                {keyArray.map((option, i) => (
+                  <div key={i} className="row">
+                    <div className="col d-flex align-items-center justify-content-between">
+                      <h3 className="d-inline m-3">{option}:</h3>
+                      <div
+                        className="btn-group"
+                        role="group"
+                        aria-label="Basic radio toggle button group"
+                      >
+                        {product.options[option].map((choice, j) => (
+                          <div key={j} className="d-inline">
+                            <input
+                              type="radio"
+                              className="btn-check"
+                              name={option}
+                              id={choice[0]}
+                              onClick={() => {
+                                prices[option] = choice[1];
+                                handleOption();
+                              }}
+                            />
+                            <label
+                              className="btn btn-outline-primary"
+                              htmlFor={choice[0]}
+                            >
+                              {choice[0]}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
               <div className="row">
-                <div className="col border p-3 d-flex align-items-center justify-content-between">
-                  <h3 className="d-inline"> Color:</h3>
-                  <div
-                    className="btn-group m-3"
-                    role="group"
-                    aria-label="Basic radio toggle button group"
-                  >
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btncolor"
-                      id="btncolor1"
-                    />
-                    <label class="btn btn-outline-primary" for="btncolor1">
-                      White
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btncolor"
-                      id="btncolor2"
-                    />
-                    <label class="btn btn-outline-primary" for="btncolor2">
-                      Gray
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btncolor"
-                      id="btncolor3"
-                    />
-                    <label class="btn btn-outline-primary" for="btncolor3">
-                      Purple
-                    </label>
-                  </div>
+                <div className="col-6">
+                  <h2>${price}</h2>
+                  <h2>
+                    {price > 4000 ? 'Free Shipping!' : '+ $9.99 Shipping'}
+                  </h2>
                 </div>
-              </div>
-              <div className="row">
-                <div className="col border p-3 d-flex align-items-center justify-content-between">
-                  <h3 className="d-inline"> Configuration:</h3>
-                  <div
-                    className="btn-group m-3"
-                    role="group"
-                    aria-label="Basic radio toggle button group"
-                  >
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btnconfig"
-                      id="btnconfig1"
-                    />
-                    <label class="btn btn-outline-primary" for="btnconfig1">
-                      M3 Pro Max
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="btnconfig"
-                      id="btnconfig2"
-                    />
-                    <label class="btn btn-outline-primary" for="btnconfig2">
-                      M3 Max
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12 border">
-                  <h2> ${price}</h2>
-                  <h2> {price > 4000 ? 'Free Shipping' : '+15$ Shipping'}</h2>
-                </div>
-                <div className="row">
-                  <div className="col-12">
-                    <a className="btn btn-primary m-2 w-100"> Add to Cart</a>
-                  </div>
+                <div className="col-6 d-flex justify-content-end align-items-center">
+                  <a className="btn btn-primary m-2" onClick={handleAddToCart}>
+                    Add To Cart
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col p-3 m-3 border">
-          <h1> Features: </h1>
-          <p className="m-5 border">
-            SUPERCHARGED BY M3—With an 8-core CPU and 10-core GPU using
-            hardware-accelerated ray tracing, the Apple M3 chip can help you
-            blaze through everyday multitasking and take on pro projects like
-            editing thousands of photos or 4K video.
-          </p>
+        <div className="row">
+          <div className="col p-3">
+            {product.features.map((feature, i) => (
+              <p key={i} className="m-3">
+                {feature}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            {product.gallery.map((image, i) => (
+              <img
+                key={i}
+                src={image}
+                alt="Product Gallery Broken Image"
+                className="w-100"
+              />
+            ))}
+          </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col">
-          {gallery.map((image, i) => (
-            <img
-              className="w-100 border"
-              src={image}
-              alt="Broken Image"
-              key={i}
-            ></img>
-          ))}
-        </div>
-      </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }
+
 export default ProductPage;

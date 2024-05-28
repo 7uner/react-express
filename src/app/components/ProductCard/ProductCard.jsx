@@ -5,7 +5,7 @@ function ProductCard({
   image,
   ProductName,
   ProductDes,
-  ProductPage,
+  ProductID,
   addToCart,
   itemInCart,
   cartNum,
@@ -26,7 +26,9 @@ function ProductCard({
         <div>
           <a
             onClick={() => {
-              navigate('/product', { state: { itc: itemInCart, cn: cartNum } });
+              navigate('/product', {
+                state: { itc: itemInCart, cn: cartNum, id: ProductID },
+              });
             }}
             className="btn btn-primary m-2"
           >

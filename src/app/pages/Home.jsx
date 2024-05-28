@@ -56,7 +56,7 @@ function Home() {
                 image={product.image}
                 ProductName={product.name}
                 ProductDes={product.Description}
-                ProductPage={product.link}
+                ProductID={product.id}
                 addToCart={handleAddToCart}
                 itemInCart={state ? state.itc : []}
                 cartNum={state ? state.cn : 0}
