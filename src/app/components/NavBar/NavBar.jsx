@@ -54,8 +54,8 @@ function NavBar({ cartNum, itemInCart }) {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
-                    About Us
+                  <a className="dropdown-item" href="/faq">
+                    FAQ
                   </a>
                 </li>
                 <li>
