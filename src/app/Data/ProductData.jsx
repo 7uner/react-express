@@ -56,6 +56,43 @@ const productList = [
     image: 'src/app/Assets/MBPro.jpg',
     Description: 'Last Gen, Just as Good, fraction of the price',
     link: '#',
+    price: 20.0,
+    features: [
+      `The MacBook Pro 15th Gen is like the cuddly teddy bear of laptops, but with a powerhouse brain! 
+      This adorable tech companion boasts a sleek and shiny body, perfect for showing off its smooth 
+      curves and stylish design. Its screen is like a big, bright smile, lighting up your world with 
+      vibrant colors and crystal-clear resolution. Inside, it's a bundle of energy, with a super-fast 
+      processor that's ready to zip through your tasks like a playful puppy. Plus, it's got an amazing 
+      memory to remember all your favorite things and a battery that just keeps going, like the Energizer 
+      Bunny. The MacBook Pro 15th Gen is the ultimate cute and cuddly gadget friend, 
+      always ready to snuggle up and get to work!`,
+    ],
+    gallery: [
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_1.jpg',
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_2.jpg',
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_3.jpg',
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_4.jpg',
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_5.jpg',
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_6.jpg',
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_7.jpg',
+      'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_8.jpg',
+    ],
+    options: {
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 300],
+        ['1 TB', 800],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Space Black', 50],
+        ['Space Blue', 50],
+      ],
+      Configuration: [
+        ['M3 Pro', 0],
+        ['M3 Max', 1000],
+      ],
+    },
   },
   {
     id: '002',
