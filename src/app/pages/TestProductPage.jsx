@@ -2,119 +2,132 @@ import Footer from '../components/NavBar/Footer';
 import NavBar from '../components/NavBar/NavBar';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import productList from '../Data/ProductData';
 
 function TestProductPage() {
   // location for perserving global data
   const { state } = useLocation();
+  // filter for the specific product from product List
+  // TODO: remember to check for null state later
+  const product = productList.filter((obj) => {
+    return obj.id === state.id;
+  })[0];
+  //hook for disply of no. of items in cart
+  const [NumCartItems, setNumCartItems] = useState(state ? state.cn : 0);
+  //hook for adding product to cart list
+  const [cart, setCart] = useState(state ? state.itc : []);
+  // fetch an array of options, for mapping use
+  const keyArray = Object.keys(product.options);
+  // options obj
+  var priceOptions = {};
+  // load the object with the date, to use for the option hook
+  keyArray.forEach((key) => (priceOptions[key] = 0));
+  // hook for price updates
+  const [price, setPrice] = useState(product.price);
+  // hook for keeping track of which options are chosen
+  const [prices, setPrices] = useState(priceOptions);
+
+  // function handler to add product to cart
+  function handleAddToCart() {
+    setCart([...cart, product]);
+    //call the usestate function here
+    setNumCartItems(NumCartItems + 1);
+  }
+
+  // function to handle price change on option select
+  function handleOption() {
+    var total = product.price;
+    for (const option in priceOptions) {
+      total += prices[option];
+    }
+    setPrice(total);
+  }
+
   return (
     <div>
-      <NavBar
-        itemInCart={state ? state.itc : []}
-        cartNum={state ? state.cn : 0}
-      />
+      <NavBar itemInCart={cart} cartNum={NumCartItems} />
       <div className="container">
         <div className="row">
-          <div className="col-6 border">
-            <img
-              className="w-100"
-              src="https://m.media-amazon.com/images/I/61dnax4xchL._AC_SL1500_.jpg"
-            ></img>
+          <div className="col-6">
+            <img className="w-100" src={product.image}></img>
           </div>
-          <div className="col-6 border">
+          <div className="col-6">
             <div className="container">
               <div className="row">
-                <div className="col border d-flex justify-content-center">
-                  <h1>Apple 2023 MacBook Pro</h1>
+                <div className="col d-flex justify-content-center">
+                  <h1>{product.name}</h1>
                 </div>
               </div>
-              <div className="row">
-                <div className="col border p-3 d-flex align-items-center justify-content-between">
-                  <h3 className="d-inline m-3">Storage Size:</h3>
-                  <div
-                    className="btn-group d-inline m-3"
-                    role="group"
-                    aria-label="Basic radio toggle button group"
-                  >
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btnradio"
-                      id="btnradio1"
-                      defaultChecked
-                    />
-                    <label
-                      className="btn btn-outline-primary"
-                      htmlFor="btnradio1"
-                    >
-                      256 GB
-                    </label>
-
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btnradio"
-                      id="btnradio2"
-                    />
-                    <label
-                      className="btn btn-outline-primary"
-                      htmlFor="btnradio2"
-                    >
-                      512 GB
-                    </label>
-
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btnradio"
-                      id="btnradio3"
-                    />
-                    <label
-                      className="btn btn-outline-primary"
-                      htmlFor="btnradio3"
-                    >
-                      1 TB
-                    </label>
+              <div>
+                {keyArray.map((option, i) => (
+                  <div key={i} className="row">
+                    <div className="col d-flex align-items-center justify-content-between">
+                      <h3 className="d-inline m-3">{option}:</h3>
+                      <div
+                        className="btn-group"
+                        role="group"
+                        aria-label="Basic radio toggle button group"
+                      >
+                        {product.options[option].map((choice, j) => (
+                          <div key={j} className="d-inline">
+                            <input
+                              type="radio"
+                              className="btn-check"
+                              name={option}
+                              id={choice[0]}
+                              onClick={() => {
+                                prices[option] = choice[1];
+                                handleOption();
+                              }}
+                            />
+                            <label
+                              className="btn btn-outline-primary"
+                              htmlFor={choice[0]}
+                            >
+                              {choice[0]}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
               <div className="row">
-                <div className="col border p-3 d-flex align-items-center justify-content-between">
-                  <h3 className="d-inline m-3">Colour:</h3>
-                  <div
-                    className="btn-group d-inline m-3"
-                    role="group"
-                    aria-label="Basic radio toggle button group"
-                  >
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btncolour"
-                      id="btncolour1"
-                      defaultChecked
-                    />
-                    <label
-                      className="btn btn-outline-primary"
-                      htmlFor="btncolour1"
-                    >
-                      Silver
-                    </label>
-
-                    <input
-                      type="radio"
-                      className="btn-check"
-                      name="btncolour"
-                      id="btncolour2"
-                    />
-                    <label
-                      className="btn btn-outline-primary"
-                      htmlFor="btncolour2"
-                    >
-                      Space Black
-                    </label>
-                  </div>
+                <div className="col-6">
+                  <h2>${price}</h2>
+                  <h2>
+                    {price > 4000 ? 'Free Shipping!' : '+ $9.99 Shipping'}
+                  </h2>
+                </div>
+                <div className="col-6 d-flex justify-content-end align-items-center">
+                  <a className="btn btn-primary m-2" onClick={handleAddToCart}>
+                    Add To Cart
+                  </a>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col p-3">
+            {product.features.map((feature, i) => (
+              <p key={i} className="m-3">
+                {feature}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            {product.gallery.map((image, i) => (
+              <img
+                key={i}
+                src={image}
+                alt="Product Gallery Broken Image"
+                className="w-100"
+              />
+            ))}
           </div>
         </div>
       </div>
