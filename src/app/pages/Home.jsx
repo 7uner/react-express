@@ -1,4 +1,4 @@
-import Welcome from '../components/Welcome/Welcome';
+import { useState } from 'react';
 import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
@@ -7,8 +7,11 @@ import ProductBar from '../components/NavBar/ProductBar';
 import productList from '../data/productList';
 
 function Home() {
+  // state hook to handle number of items in cart
+  const [cartNum, setCartNum] = useState(0);
+
   function handleAddToCart() {
-    alert('added to Cart!');
+    setCartNum(cartNum + 1);
   }
 
   return (
@@ -20,6 +23,7 @@ function Home() {
           <h1 className="display-2">
             Find the Latest Tech for the Best Price!
           </h1>
+          <h2>You have {cartNum} items in cart</h2>
         </div>
         <div className="row">
           <ProductCarousel />

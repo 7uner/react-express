@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 function ProductCard({
   image,
   ProductName,
@@ -5,6 +7,8 @@ function ProductCard({
   ProductPage,
   addToCart,
 }) {
+  const [cartDisplay, setCartDisplay] = useState(false);
+
   return (
     <div className="card h-100 d-flex flex-column justify-content-between">
       <img
@@ -28,8 +32,14 @@ function ProductCard({
             <a href={ProductPage} className="btn btn-primary m-2">
               See More
             </a>
-            <a onClick={addToCart} className="btn btn-primary m-2">
-              Add to Cart
+            <a
+              onClick={() => {
+                addToCart();
+                setCartDisplay(true);
+              }}
+              className="btn btn-primary m-2"
+            >
+              {cartDisplay ? 'Added to Cart!' : 'Add to Cart'}
             </a>
           </div>
         </div>
