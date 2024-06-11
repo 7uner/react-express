@@ -38,13 +38,68 @@ app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'app/index.html'));
 });
 
+// standard routing with a json response
 app.get('/hello', (_req, res) => {
   res.json({ Message: 'hello world' });
 });
 
+// standard post request with form data as json, the request body is automatically parsed
 app.post('/formSubmit', (_req, res) => {
   console.log(_req.body);
-  res.status(200).json({ Message: 'form data revieved and processed' });
+  res.status(200).json({ Message: 'form data recieved and processed' });
+});
+
+// variables in the oath (not the best practice)
+app.get('/hello/:name', (req, res) => {
+  const name = req.params.name;
+  res.send(`Hello, ${name}!`);
+});
+
+//route groups
+
+const users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+
+const products = [
+  { id: 1, name: 'Laptop' },
+  { id: 2, name: 'Phone' },
+];
+
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.get('/api/products', (req, res) => {
+  res.json(products);
+});
+
+var productData = {};
+
+app.get('/products', (_req, res) => {
+  res.json(productData);
+});
+
+app.post('/products/:name', (_req, res) => {
+  productData[_req.params.name] = _req.body;
+  console.log(productData);
+  res.send('product added!');
+});
+
+app.put('/products/:name/', (_req, res) => {
+  productData[_req.params.name] = _req.body;
+  res.send('product updated!');
+});
+
+app.put('/sell/:name/:quantity', (_req, res) => {
+  productData[_req.params.name]['quantity'] -= parseInt(_req.params.quantity);
+  res.send('inventory updated!');
+});
+
+app.delete('/products/:name', (_req, res) => {
+  delete productData[_req.params.name];
+  res.send('item removed!');
 });
 
 app.listen(PORT, () => {
