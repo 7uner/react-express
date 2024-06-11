@@ -1,0 +1,30 @@
+/* src/pages/About.css */
+
+/* Import any necessary fonts or stylesheets */
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.background {
+  background-image: url('../Assets/background.png'); /* Adjust the path if necessary */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Keep the background image fixed */
+  height: 100%; /* Ensure the background covers the full viewport height */
+  width: 100%; /* Ensure the background covers the full viewport width */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Place it behind other content */
+}
+
+.container-fluid {
+  position: relative; /* Ensure content is above the background */
+  z-index: 1;
+  min-height: 100vh; /* Ensure the container covers the full viewport height */
+  padding: 2rem; /* Add padding if needed for your layout */
+}
+
+/* Add any additional styles for your navigation bar, content, etc. */

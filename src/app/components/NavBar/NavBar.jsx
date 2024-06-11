@@ -39,7 +39,7 @@ function NavBar({ cartNum, itemInCart }) {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                About
+                Link
               </a>
             </li>
             <li className="nav-item dropdown">
@@ -50,12 +50,12 @@ function NavBar({ cartNum, itemInCart }) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                See More
+                Dropdown
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="/faq">
-                    FAQ
+                  <a className="dropdown-item" href="#">
+                    Action
                   </a>
                 </li>
                 <li>
