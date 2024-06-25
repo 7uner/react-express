@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const router = require('./lib/router');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const { PORT = 3001 } = process.env;
 
@@ -15,6 +16,7 @@ app.use(express.json());
 // Serve app production bundle
 app.use(express.static('dist/app'));
 
+// Code to deal with CORS
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
@@ -33,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Handle client routing, return all requests to the app
+// Handle client routing, return all requests to the app ------------------------------------------------------
 app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'app/index.html'));
 });
@@ -101,6 +103,55 @@ app.delete('/products/:name', (_req, res) => {
   delete productData[_req.params.name];
   res.send('item removed!');
 });
+
+app.get('/db', (_req, res) => {
+  addProduct().catch(console.dir);
+  res.send('Product added!');
+});
+// Handle Database related using Mongo DB Atlas
+
+// Connection String
+const uri =
+  'mongodb+srv://admin:admin@feedback.qa82eyz.mongodb.net/?retryWrites=true&w=majority&appName=FeedBack';
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db('ProductData').command({ ping: 1 });
+    console.log(
+      'Pinged your deployment. You successfully connected to MongoDB!'
+    );
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+
+async function addProduct() {
+  try {
+    // connect to the db first
+    await client.connect();
+    // choose the table we want to use
+    const database = client.db('ShoppingSite');
+    const table = database.collection('ProductData');
+    await table.insertOne({ id: 0, name: 'Tablet' });
+    //await table.insertMany(products);
+  } finally {
+    // close the connection once we are done
+    await client.close();
+  }
+}
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
