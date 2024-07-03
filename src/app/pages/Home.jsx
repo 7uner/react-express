@@ -15,13 +15,12 @@ function Home() {
 
   function handleAddToCart(product) {
     setCartNum(cartNum + 1);
-    setItemsInCart(
-      itemsInCart.concat(
-        productList.filter((obj) => {
-          return obj.name === product;
-        })
-      )
-    );
+    setItemsInCart([
+      ...itemsInCart,
+      productList.filter((obj) => {
+        return obj.name === product;
+      }),
+    ]);
   }
 
   return (
