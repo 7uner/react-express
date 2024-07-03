@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
@@ -9,14 +10,23 @@ import productList from '../data/productList';
 function Home() {
   // state hook to handle number of items in cart
   const [cartNum, setCartNum] = useState(0);
+  // state hook for items in cart
+  const [itemsInCart, setItemsInCart] = useState([]);
 
-  function handleAddToCart() {
+  function handleAddToCart(product) {
     setCartNum(cartNum + 1);
+    setItemsInCart(
+      itemsInCart.concat(
+        productList.filter((obj) => {
+          return obj.name === product;
+        })
+      )
+    );
   }
 
   return (
     <div>
-      <NavBar />
+      <NavBar itemsInCart={itemsInCart} />
       <ProductBar />
       <div className="container text-center">
         <div className="row">
@@ -30,7 +40,7 @@ function Home() {
         </div>
         <div className="row">
           {productList.map((product, i) => (
-            <div className="col-4">
+            <div className="col-4" key={i}>
               <ProductCard
                 image={product.image}
                 ProductDes={product.Description}

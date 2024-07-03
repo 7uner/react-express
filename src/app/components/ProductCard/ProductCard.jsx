@@ -34,7 +34,7 @@ function ProductCard({
             </a>
             <a
               onClick={() => {
-                addToCart();
+                addToCart(ProductName);
                 setCartDisplay(true);
               }}
               className="btn btn-primary m-2"
