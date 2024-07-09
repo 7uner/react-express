@@ -1,108 +1,51 @@
-import Welcome from '../components/Welcome/Welcome';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
 import ProductBar from '../components/NavBar/ProductBar';
-import Accordian from '../components/NavBar/Accordian';
+import productList from '../data/productList';
 
 function Home() {
-  const product = {
-    name: 'iPhone 14',
-    image: 'src/app/Assets/iPhone14.jpg',
-    Description: 'Last Gen, Just as Good, fraction of the price',
-    link: '#',
-  };
+  // state hook to handle number of items in cart
+  const [cartNum, setCartNum] = useState(0);
+  // state hook for items in cart
+  const [itemsInCart, setItemsInCart] = useState([]);
 
-  const productList = [
-    {
-      name: 'iPhone 14',
-      image: 'src/app/Assets/iPhone14.jpg',
-      Description: 'Last Gen, Just as Good, fraction of the price',
-      link: '#',
-    },
-  ];
-
-  function addToCart() {
-    alert('added to Carat!');
+  function handleAddToCart(product) {
+    setCartNum(cartNum + 1);
+    setItemsInCart([
+      ...itemsInCart,
+      productList.filter((obj) => {
+        return obj.name === product;
+      }),
+    ]);
   }
+
   return (
     <div>
-      <Accordian />
-      <NavBar />
+      <NavBar itemsInCart={itemsInCart} />
       <ProductBar />
-      <div className="container d-flex allign-items-end">
+      <div className="container text-center">
         <div className="row">
           <h1 className="display-2">
             Find the Latest Tech for the Best Price!
           </h1>
+          <h2>You have {cartNum} items in cart</h2>
         </div>
         <div className="row">
           <ProductCarousel />
         </div>
         <div className="row">
-          <div className="col-12">
-            <ProductCard
-              image={'src/app/Assets/MacBookPro.jpg'}
-              ProductName={'Mac Book Pro 15th Gen'}
-              ProductDes={
-                'Get the latest Mac Book Pro with the Powerful M2 Chip!'
-              }
-              ProductPage={'#'}
-              addToCart={addToCart}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/iPhone15Pro.webp'}
-              ProductName={'iPhone 15 Pro'}
-              ProductDes={'Get the latest iPhone 15 Pro!'}
-              ProductPage={'#'}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/iPad10th.jpg'}
-              ProductName={'iPhone 10th Gen'}
-              ProductDes={'Get the latest iPad 10th Gen!'}
-              ProductPage={'#'}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/AirPodsMax.jpg'}
-              ProductName={'Air Pods Max'}
-              ProductDes={'these wont fall out of your ears!'}
-              ProductPage={'#'}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={product.image}
-              ProductName={product.name}
-              ProductDes={product.Description}
-              ProductPage={product.link}
-            />
-          </div>
-          <div className="col-4">
-            <ProductCard
-              image={'src/app/Assets/AirPodsMax.jpg'}
-              ProductName={'Air Pods Max'}
-              ProductDes={'these wont fall out of your ears!'}
-              ProductPage={'#'}
-            />
-          </div>
-        </div>
-        <div className="row">
           {productList.map((product, i) => (
-            <div className="col-4">
+            <div className="col-4" key={i}>
               <ProductCard
                 image={product.image}
                 ProductDes={product.Description}
                 ProductName={product.name}
-                ProductPage={addToCart}
+                ProductPage={product.link}
+                addToCart={handleAddToCart}
               />
             </div>
           ))}
