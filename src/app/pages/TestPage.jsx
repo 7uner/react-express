@@ -1,21 +1,22 @@
-import NavBar from '../components/NavBar/NavBar';
-import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
 import Footer from '../components/Footer/Footer';
+import NavBar from '../components/NavBar/NavBar';
 import ProductCard from '../components/ProductCard/ProductCard';
-import Accordian from '../components/NavBar/Accordian';
+import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
 
 function TestPage() {
   return (
     <div>
-      <Accordian />
       <NavBar />
-      <ProductCarousel />
-      <ProductCard
-        image={'src/app/Assets/MacBookPro.jpg'}
-        ProductName={'Mac Book Pro 15th Gen'}
-        ProductDes={'Get the latest Mac Book Pro with the Powerful M2 Chip!'}
-        ProductPage={'#'}
-      />
+      <div className="w-75 mx-auto">
+        <ProductCarousel />
+      </div>
+      <div className="w-25">
+        <ProductCard
+          image={'src/app/Assets/iPhone15Pro.webp'}
+          ProductName={'iPhone 15'}
+          ProductDes={'The latest iPhone'}
+        />
+      </div>
       <Footer />
     </div>
   );
