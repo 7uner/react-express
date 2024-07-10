@@ -65,8 +65,8 @@ const users = [
 ];
 
 const products = [
-  { id: 1, name: 'Laptop' },
-  { id: 2, name: 'Phone' },
+  { id: 10, name: 'webcacm' },
+  { id: 22, name: 'GPU' },
 ];
 
 app.get('/api/users', (req, res) => {
@@ -105,9 +105,10 @@ app.delete('/products/:name', (_req, res) => {
 });
 
 app.get('/db', (_req, res) => {
-  addProduct().catch(console.dir);
-  res.send('Product added!');
+  updateProduct().catch(console.dir);
+  res.send('producct added!');
 });
+
 // Handle Database related using Mongo DB Atlas
 
 // Connection String
@@ -144,9 +145,23 @@ async function addProduct() {
     await client.connect();
     // choose the table we want to use
     const database = client.db('ShoppingSite');
-    const table = database.collection('ProductData');
-    await table.insertOne({ id: 0, name: 'Tablet' });
+    const table = database.collection('test');
+    await table.insertOne({ id: 0, name: 'Tablet', quantity: 10 });
     //await table.insertMany(products);
+  } finally {
+    // close the connection once we are done
+    await client.close();
+  }
+}
+
+async function updateProduct() {
+  try {
+    // connect to the db first
+    await client.connect();
+    // choose the table we want to use
+    const database = client.db('ShoppingSite');
+    const table = database.collection('test');
+    await table.updateOne({ id: 0 }, { $set: { quantity: 2 } });
   } finally {
     // close the connection once we are done
     await client.close();
