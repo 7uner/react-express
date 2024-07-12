@@ -1,4 +1,5 @@
 function CartCard({ img, name, des, price, shipping }) {
+  console.log(img);
   return (
     <div>
       <div className="card">
@@ -8,7 +9,7 @@ function CartCard({ img, name, des, price, shipping }) {
               <img
                 src={img}
                 alt="cart card image broken"
-                className="w-100"
+                className="card-img-top"
               ></img>
             </div>
             <div className="col-6 d-flex flex-column justify-content-center">

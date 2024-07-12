@@ -8,31 +8,32 @@ import ProductBar from '../components/NavBar/ProductBar';
 import productList from '../data/productList';
 
 function Home() {
+  // use loccation to recieve data from other routes
+  const { state } = useLocation();
   // state hook to handle number of items in cart
-  const [cartNum, setCartNum] = useState(0);
+  const [cartNum, setCartNum] = useState(state ? state.cn : 0);
   // state hook for items in cart
-  const [itemsInCart, setItemsInCart] = useState([]);
+  const [cart, setCart] = useState(state ? state.itc : []);
 
   function handleAddToCart(product) {
     setCartNum(cartNum + 1);
-    setItemsInCart([
-      ...itemsInCart,
+    setCart([
+      ...cart,
       productList.filter((obj) => {
         return obj.name === product;
-      }),
+      })[0],
     ]);
   }
 
   return (
     <div>
-      <NavBar itemsInCart={itemsInCart} />
+      <NavBar cart={cart} cartNum={cartNum} />
       <ProductBar />
       <div className="container text-center">
         <div className="row">
           <h1 className="display-2">
             Find the Latest Tech for the Best Price!
           </h1>
-          <h2>You have {cartNum} items in cart</h2>
         </div>
         <div className="row">
           <ProductCarousel />

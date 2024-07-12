@@ -3,23 +3,26 @@ import ProductBar from '../components/NavBar/ProductBar';
 import CartCard from '../components/ProductCard/CartCard';
 import Footer from '../components/Footer/Footer';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
-function CartPage({}) {
+function CartPage() {
   const { state } = useLocation();
-  console.log(state.itc);
+  const [cartNum, setCartNum] = useState(state ? state.cn : 0);
+  const [cart, setCart] = useState(state ? state.itc : []);
+  console.log(cart);
   return (
     <div>
-      <NavBar />
+      <NavBar cart={cart} cartNum={cartNum} />
       <ProductBar />
       <div className="container">
-        {state.itc.map((product, i) => (
-          <div className="row" key="i">
-            <div className="col" key="i">
+        {cart.map((product, i) => (
+          <div className="row" key={i}>
+            <div className="col">
               <CartCard
-                image={product.image}
+                img={product.image}
                 name={product.name}
                 des={product.Description}
-                price={'99.99'}
+                price={product.price}
                 shipping={'9.99'}
               ></CartCard>
             </div>
