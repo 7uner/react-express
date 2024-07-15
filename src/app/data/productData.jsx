@@ -52,10 +52,44 @@ const productList = [
   },
   {
     id: '001',
-    name: 'Mac Book Pro 15th Gen',
+    name: 'Apple 2022 MacBook Air',
     image: 'src/app/Assets/MacBookPro.jpg',
     Description: 'Last Gen, Just as Good, fraction of the price',
     link: '#',
+    price: 1289.99,
+    features: [
+      `STRIKINGLY THIN DESIGN — The redesigned MacBook Air is more portable than ever and weighs just 2.7 pounds. 
+    It’s the incredibly capable laptop that lets you work, play or create just about anything — anywhere`,
+      `SUPERCHARGED BY M2 — Get more done faster with a next-generation 8-core CPU, up to 10-core GPU and up to 24GB of unified memory.`,
+      `UP TO 18 HOURS OF BATTERY LIFE — Go all day and into the night, thanks to the power-efficient performance of the Apple M2 chip.`,
+    ],
+    gallery: [
+      'src/app/Assets/2022MacBookAir/MacBookAir (1).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (2).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (3).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (4).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (5).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (6).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (7).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (8).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (9).jpg',
+    ],
+    options: {
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 300],
+        ['1 TB', 800],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Midnight', 100],
+        ['Starlight', 120],
+      ],
+      Configuration: [
+        ['M2 8 Core', 0],
+        ['M2 10 Core', 800],
+      ],
+    },
   },
   {
     id: '002',
@@ -63,6 +97,39 @@ const productList = [
     image: 'src/app/Assets/iPad10th.jpg',
     Description: 'Get the latest iPad 10th Gen!',
     link: '#',
+    price: 489.99,
+    features: [
+      `Apple iPad (10th generation): With A14 Bionic chip, 10.9-inch Liquid Retina display, 64GB, Wi-Fi 6, 12MP front/12MP back camera, Touch ID, all-day battery life `,
+      `Colourfully reimagined and more versatile than ever, iPad is great for the things you do every day. With an all-screen design, 10.9-inch Liquid Retina display, 
+      powerful A14 Bionic chip, superfast Wi-Fi and four gorgeous colours, iPad delivers a powerful way to create, stay connected and get things done.`,
+      `iPadOS makes iPad more productive, intuitive and versatile. With iPadOS, run multiple apps at once, use Apple Pencil to write in any text field with Scribble,
+       and edit and share photos. iPad comes with essential apps like Safari, Messages and Keynote, with over a million more apps available on the App Store.`,
+    ],
+    gallery: [
+      'src/app/Assets/iPad10/iPad10.jpg',
+      'src/app/Assets/iPad10/iPad10 (1).jpg',
+      'src/app/Assets/iPad10/iPad10 (2).jpg',
+      'src/app/Assets/iPad10/iPad10 (3).jpg',
+      'src/app/Assets/iPad10/iPad10 (4).jpg',
+      'src/app/Assets/iPad10/iPad10 (5).jpg',
+      'src/app/Assets/iPad10/iPad10 (6).jpg',
+    ],
+    options: {
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 100],
+        ['1 TB', 300],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Midnight', 50],
+        ['Starlight', 80],
+      ],
+      Configuration: [
+        ['Wifi Only', 0],
+        ['Wifi and Cellular', 300],
+      ],
+    },
   },
   {
     id: '003',
@@ -70,6 +137,40 @@ const productList = [
     image: 'src/app/Assets/iPhone15Pro.webp',
     Description: 'Get the latest iPhone 15 Pro!',
     link: '#',
+    price: 1289.99,
+    features: [
+      `STRIKINGLY THIN DESIGN — The redesigned MacBook Air is more portable than ever and weighs just 2.7 pounds. 
+    It’s the incredibly capable laptop that lets you work, play or create just about anything — anywhere`,
+      `SUPERCHARGED BY M2 — Get more done faster with a next-generation 8-core CPU, up to 10-core GPU and up to 24GB of unified memory.`,
+      `UP TO 18 HOURS OF BATTERY LIFE — Go all day and into the night, thanks to the power-efficient performance of the Apple M2 chip.`,
+    ],
+    gallery: [
+      'src/app/Assets/2022MacBookAir/MacBookAir (1).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (2).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (3).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (4).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (5).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (6).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (7).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (8).jpg',
+      'src/app/Assets/2022MacBookAir/MacBookAir (9).jpg',
+    ],
+    options: {
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 300],
+        ['1 TB', 800],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Midnight', 100],
+        ['Starlight', 120],
+      ],
+      Configuration: [
+        ['M2 8 Core', 0],
+        ['M2 10 Core', 800],
+      ],
+    },
   },
   {
     id: '004',
