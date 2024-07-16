@@ -1,4 +1,7 @@
-function NavBar() {
+import { useNavigate } from 'react-router-dom';
+
+function NavBar({ itemsInCart }) {
+  const navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -86,7 +89,13 @@ function NavBar() {
               </button>
             </form>
           </ul>
-          <a className="btn btn-outline-success" href="/cart">
+          <a
+            className="btn btn-outline-success"
+            href="/cart"
+            onClick={() => {
+              navigate('/cart', { state: { itc: itemsInCart } });
+            }}
+          >
             Cart
           </a>
         </div>

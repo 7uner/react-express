@@ -26,19 +26,6 @@ function CartPage({}) {
           </div>
         ))}
       </div>
-      <div className="row">
-        {productList.map((product, i) => (
-          <div className="col-4" key={i}>
-            <ProductCard
-              image={product.image}
-              ProductDes={product.Description}
-              ProductName={product.name}
-              ProductPage={product.link}
-              addToCart={handleAddToCart}
-            />
-          </div>
-        ))}
-      </div>
       <Footer />
     </div>
   );
