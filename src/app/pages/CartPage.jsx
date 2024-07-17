@@ -16,7 +16,7 @@ function CartPage({}) {
           <div className="row" key="i">
             <div className="col" key="i">
               <CartCard
-                image={product.image}
+                img={product.image}
                 name={product.name}
                 des={product.Description}
                 price={'99.99'}
