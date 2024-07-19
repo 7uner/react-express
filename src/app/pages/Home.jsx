@@ -25,7 +25,6 @@ function Home() {
         return obj.name === ProductName;
       })[0],
     ]);
-    console.log(cart);
     //call the usestate function here
     setNumCartItems(NumCartItems + 1);
     if (NumCartItems >= 5) {

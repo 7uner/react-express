@@ -20,11 +20,4 @@ html {
   z-index: -1; /* Place it behind other content */
 }
 
-.container-fluid {
-  position: relative; /* Ensure content is above the background */
-  z-index: 1;
-  min-height: 100vh; /* Ensure the container covers the full viewport height */
-  padding: 2rem; /* Add padding if needed for your layout */
-}
-
 /* Add any additional styles for your navigation bar, content, etc. */
