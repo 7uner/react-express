@@ -1,4 +1,4 @@
-function CartCard({ img, name, des, price, shipping }) {
+function CartCard({ img, name, des, price, shipping, handleDelete }) {
   return (
     <div>
       <div className="card">
@@ -15,7 +15,14 @@ function CartCard({ img, name, des, price, shipping }) {
               <h1 className="mx-auto">{name}</h1>
               <h3 className="mx-auto">{des}</h3>
               <div className="mx-auto">
-                <a className="btn btn-primary">Delete</a>
+                <a
+                  className="btn btn-primary"
+                  onClick={() => {
+                    handleDelete(name);
+                  }}
+                >
+                  Delete
+                </a>
                 <a className="btn btn-primary m-3">Save for Later</a>
                 <a className="btn btn-primary">Details</a>
               </div>

@@ -3,10 +3,22 @@ import ProductBar from '../components/NavBar/ProductBar';
 import CartCard from '../components/ProductCard/CartCard';
 import Footer from '../components/Footer/Footer';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 function CartPage({}) {
   const { state } = useLocation();
+  const [cartNum, setCartNum] = useState(state ? state.cn : 0);
+  const [cart, setCart] = useState(state ? state.itc : []);
   console.log(state.itc);
+
+  function handleDeleteCart(product) {
+    setCart(cartNum - 1);
+    setCart(
+      cart.filter((obj) => {
+        return obj.name !== product;
+      })
+    );
+  }
   return (
     <div>
       <NavBar />
@@ -21,6 +33,7 @@ function CartPage({}) {
                 des={product.Description}
                 price={'99.99'}
                 shipping={'9.99'}
+                handleDelete={handleDeleteCart}
               ></CartCard>
             </div>
           </div>

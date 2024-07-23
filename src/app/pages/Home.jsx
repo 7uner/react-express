@@ -20,6 +20,7 @@ function Home() {
       productList.filter((obj) => {
         return obj.name === product;
       }),
+      [0],
     ]);
   }
 
