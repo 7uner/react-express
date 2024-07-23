@@ -8,6 +8,7 @@ function FeedbackForm() {
     fetch('http://localhost:3001/testDB')
       .then((response) => response.json())
       .then((json) => setData(json))
+      .then(() => console.log(data))
       .catch((error) => console.error(error));
   }
 
