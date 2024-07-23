@@ -1,6 +1,18 @@
+import { useState } from 'react';
+
 function FeedbackForm() {
+  const [data, setData] = useState('nothing recieved from the server yet');
+
+  function handleDB(event) {
+    event.preventDefault();
+    fetch('http://localhost:3001/testDB')
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error));
+  }
+
   return (
-    <form action="javascript:alert('Thanks!')">
+    <form>
       <div>
         <label>Name:</label>
         <input id="name" name="name" type="text"></input>
@@ -9,8 +21,15 @@ function FeedbackForm() {
         <label>Feedback:</label>
         <input id="feedback" name="feedback" type="text"></input>
       </div>
+      <div>{data}</div>
       <div>
-        <input id="submit" type="submit"></input>
+        <button
+          className="btn btn-outline-success"
+          id="submit"
+          onClick={handleDB}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

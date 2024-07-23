@@ -58,25 +58,6 @@ app.get('/hello/:name', (req, res) => {
 });
 
 //route groups
-
-const users = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
-
-const products = [
-  { id: 10, name: 'webcacm' },
-  { id: 22, name: 'GPU' },
-];
-
-app.get('/api/users', (req, res) => {
-  res.json(users);
-});
-
-app.get('/api/products', (req, res) => {
-  res.json(products);
-});
-
 var productData = {};
 
 app.get('/products', (_req, res) => {
@@ -105,10 +86,27 @@ app.delete('/products/:name', (_req, res) => {
 });
 
 app.get('/db', (_req, res) => {
-  updateProduct().catch(console.dir);
-  res.send('producct added!');
+  deleteProduct().catch(console.dir);
+  res.send('product deleted!');
 });
 
+app.get('/testDB', async (_req, res) => {
+  const results = await queryProduct();
+  //console.log(results);
+  res.json(results);
+});
+
+app.get('/addProduct', async (_req, res) => {
+  addProduct();
+  //console.log(results);
+  res.json('added');
+});
+
+app.get('/findAllProduct', async (_req, res) => {
+  const results = await getAllProduct();
+  console.log(results);
+  res.json(results);
+});
 // Handle Database related using Mongo DB Atlas
 
 // Connection String
@@ -144,10 +142,10 @@ async function addProduct() {
     // connect to the db first
     await client.connect();
     // choose the table we want to use
-    const database = client.db('ShoppingSite');
-    const table = database.collection('test');
-    await table.insertOne({ id: 0, name: 'Tablet', quantity: 10 });
-    //await table.insertMany(products);
+    const database = client.db('ShoppingSiteJason');
+    const table = database.collection('products');
+    //await table.insertOne({ id: 0, name: 'Tablet', quantity: 10 });
+    await table.insertMany(productList);
   } finally {
     // close the connection once we are done
     await client.close();
@@ -164,6 +162,45 @@ async function updateProduct() {
     await table.updateOne({ id: 0 }, { $set: { quantity: 2 } });
   } finally {
     // close the connection once we are done
+    await client.close();
+  }
+}
+
+async function deleteProduct() {
+  try {
+    await client.connect();
+    const database = client.db('ShoppingSite');
+    const table = database.collection('test');
+    await table.deleteOne({ id: 1 });
+  } finally {
+    await client.close();
+  }
+}
+
+async function getAllProduct() {
+  try {
+    await client.connect();
+    const database = client.db('ShoppingSite');
+    const table = database.collection('ProductData');
+    const results = await table.find().toArray();
+    //console.log(results['message']);
+    return results;
+  } catch (err) {
+    console.error('An error occurred. Error message:' + err.message);
+  } finally {
+    await client.close();
+  }
+}
+
+async function queryProduct() {
+  try {
+    await client.connect();
+    const database = client.db('ShoppingSite');
+    const table = database.collection('test');
+    const results = await table.findOne({ id: 0 });
+    //console.log(results['message']);
+    return results['message'];
+  } finally {
     await client.close();
   }
 }
