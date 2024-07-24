@@ -5,6 +5,7 @@ const productList = [
     Description: 'Last Gen, Just as Good, fraction of the price',
     link: '#',
     price: 899.99,
+    quantity: 1,
   },
   {
     name: 'iPhone 15 Pro',
@@ -12,6 +13,7 @@ const productList = [
     Description: 'Last Gen, Just as Good, fraction of the price',
     link: '#',
     price: 1299.99,
+    quantity: 1,
   },
   {
     name: 'iPad 10',
@@ -19,6 +21,7 @@ const productList = [
     Description: 'Last Gen, Just as Good, fraction of the price',
     link: '#',
     price: 599.99,
+    quantity: 1,
   },
   {
     name: 'Air pods Max',
@@ -26,6 +29,7 @@ const productList = [
     Description: 'Last Gen, Just as Good, fraction of the price',
     link: '#',
     price: 799.99,
+    quantity: 1,
   },
   {
     name: 'Mac Book Pro',
@@ -33,6 +37,7 @@ const productList = [
     Description: 'Last Gen, Just as Good, fraction of the price',
     link: '#',
     price: 3299.99,
+    quantity: 1,
   },
 ];
 
