@@ -85,8 +85,8 @@ app.delete('/products/:name', (_req, res) => {
   res.send('item removed!');
 });
 
-app.get('/db', (_req, res) => {
-  deleteProduct().catch(console.dir);
+app.get('/db', async (_req, res) => {
+  await createIndex();
   res.send('product deleted!');
 });
 
@@ -100,6 +100,11 @@ app.get('/addProduct', async (_req, res) => {
   addProduct();
   //console.log(results);
   res.json('added');
+});
+
+app.get('/updateProduct/:id', async (_req, res) => {
+  await updateProduct(_req.params.id);
+  res.json('added to cart');
 });
 
 app.get('/findAllProduct', async (_req, res) => {
@@ -137,29 +142,110 @@ async function run() {
   }
 }
 
+async function createIndex() {
+  try {
+    await client.connect();
+    const database = client.db('ShoppingSite');
+    //const table = database.collection('ProductData');
+    const table2 = database.collection('cart');
+    //await table.createIndex({ id: 1, name: 1 }, { unique: true });
+    await table2.createIndex({ id: 1, name: 1 }, { unique: true });
+  } catch (err) {
+    console.error('An error occurred. Error message:' + err.message);
+  } finally {
+    await client.close();
+  }
+}
+
+const product01 = {
+  id: '000',
+  name: 'Apple 2023 MacBook Pro',
+  image: 'https://m.media-amazon.com/images/I/61dnax4xchL._AC_SL1500_.jpg',
+  Description: 'Mind Blowing, Head Turning',
+  link: '#',
+  price: 3299.99,
+  features: [
+    `SUPERCHARGED BY M3 PRO OR M3 MAX—The Apple M3 Pro chip, with a
+  12-core CPU and 18-core GPU using hardware-accelerated ray
+  tracing, delivers amazing performance for demanding workflows like
+  manipulating gigapixel panoramas or compiling millions of lines of
+  code. M3 Max, with an up to 16-core CPU and up to 40-core GPU,
+  drives extreme performance for the most advanced workflows like
+  rendering intricate 3D content or developing transformer models
+  with billions of parameters.`,
+    `UP TO 22 HOURS OF BATTERY LIFE—Go all day thanks to the
+  power-efficient design of Apple silicon. MacBook Pro delivers the
+  same exceptional performance whether it’s running on battery or
+  plugged in.`,
+    `RESPONSIVE UNIFIED MEMORY AND STORAGE—Up to 36GB (M3 Pro) or up to
+  128GB (M3 Max) of unified memory makes everything you do fast and
+  fluid. Up to 4TB (M3 Pro) or up to 8TB (M3 Max) of superfast SSD
+  storage launches apps and opens files in an instant.`,
+  ],
+  gallery: [
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_1.jpg',
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_2.jpg',
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_3.jpg',
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_4.jpg',
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_5.jpg',
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_6.jpg',
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_7.jpg',
+    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_8.jpg',
+  ],
+  options: {
+    Storage: [
+      ['256 GB', 0],
+      ['512 GB', 300],
+      ['1 TB', 800],
+    ],
+    Colour: [
+      ['Silver', 0],
+      ['Space Black', 100],
+    ],
+    Configuration: [
+      ['M3 Pro', 0],
+      ['M3 Max', 1000],
+    ],
+  },
+};
+
 async function addProduct() {
   try {
     // connect to the db first
     await client.connect();
     // choose the table we want to use
-    const database = client.db('ShoppingSiteJason');
-    const table = database.collection('products');
-    //await table.insertOne({ id: 0, name: 'Tablet', quantity: 10 });
-    await table.insertMany(productList);
+    const database = client.db('ShoppingSite');
+    const table = database.collection('productList');
+    await table.insertOne(product01);
+    //await table.insertMany(productList);
+  } catch (err) {
+    console.error('An error occurred. Error message:' + err.message);
   } finally {
     // close the connection once we are done
     await client.close();
   }
 }
 
-async function updateProduct() {
+async function updateProduct(productID) {
   try {
     // connect to the db first
     await client.connect();
     // choose the table we want to use
     const database = client.db('ShoppingSite');
-    const table = database.collection('test');
-    await table.updateOne({ id: 0 }, { $set: { quantity: 2 } });
+    const table = database.collection('ProductData');
+    // filter for the complete prodcccut object that is to be added
+    const result = await table.findOne({ id: productID });
+    // then we can update the cart with this new objet
+    const table2 = database.collection('cart');
+    // we need to find the current qty of the product in cart, this will be NULL if product isnt already in cart
+    const quantity = await table2.findOne({ id: productID });
+    await table2.updateOne(
+      { id: productID },
+      { $set: { ...result, qty: quantity ? quantity['qty'] + 1 : 1 } },
+      { upsert: true }
+    );
+  } catch (err) {
+    console.error('An error occurred. Error message:' + err.message);
   } finally {
     // close the connection once we are done
     await client.close();
@@ -172,6 +258,8 @@ async function deleteProduct() {
     const database = client.db('ShoppingSite');
     const table = database.collection('test');
     await table.deleteOne({ id: 1 });
+  } catch (err) {
+    console.error('An error occurred. Error message:' + err.message);
   } finally {
     await client.close();
   }
@@ -200,6 +288,8 @@ async function queryProduct() {
     const results = await table.findOne({ id: 0 });
     //console.log(results['message']);
     return results['message'];
+  } catch (err) {
+    console.error('An error occurred. Error message:' + err.message);
   } finally {
     await client.close();
   }

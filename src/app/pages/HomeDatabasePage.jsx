@@ -21,7 +21,7 @@ function HomeDatabasePage() {
       .then((json) => setProductList(json))
       .then(() => console.log(productList))
       .catch((error) => console.error(error));
-  }, [productList]);
+  }, []);
 
   return (
     <div>
