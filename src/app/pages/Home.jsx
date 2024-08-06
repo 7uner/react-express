@@ -9,23 +9,21 @@ function Home() {
   // location for perserving global data
   const { state } = useLocation();
   //hook for disply of no. of items in cart
-  const [NumCartItems, setNumCartItems] = useState(state ? state.cn : 0);
+  const [NumCartItems, setNumCartItems] = useState(0);
   //hook for cart item title display
   const [show, setShow] = useState(true);
   //hook for adding product to cart list
-  const [cart, setCart] = useState(state ? state.itc : []);
+  const [cart, setCart] = useState([]);
   //hook for fetching the entire producct list
   const [productList, setProductList] = useState([]);
 
   // function handler to add product to cart
-  function handleAddToCart(ProductName) {
+  function handleAddToCart(productID) {
     //add our item to the cart list, update state
-    setCart([
-      ...cart,
-      productList.filter((obj) => {
-        return obj.name === ProductName;
-      })[0],
-    ]);
+    fetch('http://localhost:3001/updateProduct/' + productID)
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+      .catch((error) => console.error(error));
     //call the usestate function here
     setNumCartItems(NumCartItems + 1);
     if (NumCartItems >= 5) {
@@ -38,7 +36,6 @@ function Home() {
     fetch('http://localhost:3001/findAllProduct')
       .then((response) => response.json())
       .then((json) => setProductList(json))
-      .then(() => console.log(productList))
       .catch((error) => console.error(error));
   }, []);
 

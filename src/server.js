@@ -47,7 +47,6 @@ app.get('/hello', (_req, res) => {
 
 // standard post request with form data as json, the request body is automatically parsed
 app.post('/formSubmit', (_req, res) => {
-  console.log(_req.body);
   res.status(200).json({ Message: 'form data recieved and processed' });
 });
 
@@ -66,7 +65,6 @@ app.get('/products', (_req, res) => {
 
 app.post('/products/:name', (_req, res) => {
   productData[_req.params.name] = _req.body;
-  console.log(productData);
   res.send('product added!');
 });
 
@@ -92,24 +90,37 @@ app.get('/db', async (_req, res) => {
 
 app.get('/testDB', async (_req, res) => {
   const results = await queryProduct();
-  //console.log(results);
   res.json(results);
 });
 
 app.get('/addProduct', async (_req, res) => {
   addProduct();
-  //console.log(results);
   res.json('added');
 });
 
 app.get('/updateProduct/:id', async (_req, res) => {
   await updateProduct(_req.params.id);
-  res.json('added to cart');
+  res.json('cart updated with product with id ' + _req.params.id);
+});
+
+app.get('/updateQuantity/:id/:qty', async (_req, res) => {
+  await updateQuantity(_req.params.id, _req.params.qty);
+  res.json('cart quantity updated with product with id ' + _req.params.id);
+});
+
+app.get('/deleteProduct/:id', async (_req, res) => {
+  await deleteProduct(_req.params.id);
+  res.json('deleted product with id ' + _req.params.id);
+});
+
+//get cart info
+app.get('/getCart', async (_req, res) => {
+  const results = await getAllProduct('cart');
+  res.json(results);
 });
 
 app.get('/findAllProduct', async (_req, res) => {
-  const results = await getAllProduct();
-  console.log(results);
+  const results = await getAllProduct('ProductData');
   res.json(results);
 });
 // Handle Database related using Mongo DB Atlas
@@ -157,58 +168,6 @@ async function createIndex() {
   }
 }
 
-const product01 = {
-  id: '000',
-  name: 'Apple 2023 MacBook Pro',
-  image: 'https://m.media-amazon.com/images/I/61dnax4xchL._AC_SL1500_.jpg',
-  Description: 'Mind Blowing, Head Turning',
-  link: '#',
-  price: 3299.99,
-  features: [
-    `SUPERCHARGED BY M3 PRO OR M3 MAX—The Apple M3 Pro chip, with a
-  12-core CPU and 18-core GPU using hardware-accelerated ray
-  tracing, delivers amazing performance for demanding workflows like
-  manipulating gigapixel panoramas or compiling millions of lines of
-  code. M3 Max, with an up to 16-core CPU and up to 40-core GPU,
-  drives extreme performance for the most advanced workflows like
-  rendering intricate 3D content or developing transformer models
-  with billions of parameters.`,
-    `UP TO 22 HOURS OF BATTERY LIFE—Go all day thanks to the
-  power-efficient design of Apple silicon. MacBook Pro delivers the
-  same exceptional performance whether it’s running on battery or
-  plugged in.`,
-    `RESPONSIVE UNIFIED MEMORY AND STORAGE—Up to 36GB (M3 Pro) or up to
-  128GB (M3 Max) of unified memory makes everything you do fast and
-  fluid. Up to 4TB (M3 Pro) or up to 8TB (M3 Max) of superfast SSD
-  storage launches apps and opens files in an instant.`,
-  ],
-  gallery: [
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_1.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_2.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_3.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_4.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_5.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_6.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_7.jpg',
-    'src/app/Assets/2023MacBookProM3/MacBook_Pro_M3_Gallery_8.jpg',
-  ],
-  options: {
-    Storage: [
-      ['256 GB', 0],
-      ['512 GB', 300],
-      ['1 TB', 800],
-    ],
-    Colour: [
-      ['Silver', 0],
-      ['Space Black', 100],
-    ],
-    Configuration: [
-      ['M3 Pro', 0],
-      ['M3 Max', 1000],
-    ],
-  },
-};
-
 async function addProduct() {
   try {
     // connect to the db first
@@ -252,12 +211,12 @@ async function updateProduct(productID) {
   }
 }
 
-async function deleteProduct() {
+async function updateQuantity(productID, quantity) {
   try {
     await client.connect();
     const database = client.db('ShoppingSite');
-    const table = database.collection('test');
-    await table.deleteOne({ id: 1 });
+    const table = database.collection('cart');
+    await table.updateOne({ id: productID }, { $set: { qty: quantity } });
   } catch (err) {
     console.error('An error occurred. Error message:' + err.message);
   } finally {
@@ -265,13 +224,25 @@ async function deleteProduct() {
   }
 }
 
-async function getAllProduct() {
+async function deleteProduct(productID) {
   try {
     await client.connect();
     const database = client.db('ShoppingSite');
-    const table = database.collection('ProductData');
+    const table = database.collection('cart');
+    await table.deleteOne({ id: productID });
+  } catch (err) {
+    console.error('An error occurred. Error message:' + err.message);
+  } finally {
+    await client.close();
+  }
+}
+
+async function getAllProduct(tableName) {
+  try {
+    await client.connect();
+    const database = client.db('ShoppingSite');
+    const table = database.collection(tableName);
     const results = await table.find().toArray();
-    //console.log(results['message']);
     return results;
   } catch (err) {
     console.error('An error occurred. Error message:' + err.message);
@@ -286,7 +257,6 @@ async function queryProduct() {
     const database = client.db('ShoppingSite');
     const table = database.collection('test');
     const results = await table.findOne({ id: 0 });
-    //console.log(results['message']);
     return results['message'];
   } catch (err) {
     console.error('An error occurred. Error message:' + err.message);
