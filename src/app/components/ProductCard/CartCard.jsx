@@ -6,7 +6,7 @@ function CartCard({ img, name, des, price, shipping }) {
                     <div className="row"> 
                         <div className="col-4 border border-3"> 
                             <img 
-                                src={img} // Dynamic image source
+                                src={img} 
                                 alt="broken"
                                 className="w-100"
                             /> 

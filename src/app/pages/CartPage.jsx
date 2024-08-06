@@ -1,65 +1,68 @@
-import NavBar from '../components/NavBar/NavBar';
+import React, { useState } from 'react';
 import Footer from '../components/Footer/Footer';
 import ProductCardCart from '../components/ProductCard/ProductCardCart';
-import { useLocation, useHistory } from 'react-router-dom';
-import { useState } from 'react';
-import Cart from '../components/Cart/Cart';
+import NavBar from '../components/NavBar/NavBar';
+import { useLocation } from 'react-router-dom';
 
 function CartPage() {
   const { state } = useLocation();
-  const history = useHistory();
 
-  // Default cart items if state is undefined
-  const defaultCartItems = [
-    { 
-      name: 'Product 1', 
-      description: 'Description 1', 
-      image: 'src/app/Assets/iPhone15Pro.webp', 
-      link: '/product/1' // Example link to a product detail page
+  const defaultItems = [
+    {
+      name: 'Product 1',
+      description: 'Description 1',
+      image: 'src/app/Assets/iPhone15Pro.webp',
+      link: 'hihihi',
+      itemNumber: 1,
     },
-    { 
-      name: 'Product 2', 
-      description: 'Description 2', 
-      image: 'src/app/Assets/MacBookPro.jpg', 
-      link: '/product/2' // Example link to a product detail page
+    {
+      name: 'Product 2',
+      description: 'Description 2',
+      image: 'src/app/Assets/MacBookPro.jpg',
+      link: 'hihihi',
+      itemNumber: 1,
     },
   ];
 
-  // Use state hooks for cart and number of items
-  const [cart, setCart] = useState(state?.itc || defaultCartItems);
-  const [numCartItems, setNumCartItems] = useState(cart.length);
+  const [cart, setCart] = useState(state?.itc || defaultItems);
+  const [totalItems, setTotalItems] = useState(cart.reduce((acc, item) => acc + item.itemNumber, 0));
 
-  // Delete event handler
-  function handleDeleteItem(productName) {
+  const removeItem = (productName) => {
     const updatedCart = cart.filter((product) => product.name !== productName);
     setCart(updatedCart);
-    setNumCartItems(updatedCart.length);
-  }
+    setTotalItems(updatedCart.reduce((acc, item) => acc + item.itemNumber, 0));
+  };
 
-  // Handle navigation to product page
-  function handleProductClick(link) {
-    history.push(link);
-  }
+  const updateItemNumber = (productName, itemNumber) => {
+    const updatedCart = cart.map((product) =>
+      product.name === productName ? { ...product, itemNumber } : product
+    );
+    setCart(updatedCart);
+    setTotalItems(updatedCart.reduce((acc, item) => acc + item.itemNumber, 0));
+  };
 
   return (
     <div>
-      <NavBar cartNum={numCartItems} itemInCart={cart} />
-      <Cart />
+      <NavBar cartNum={totalItems} itemInCart={cart} />
       <div className="container">
-        {cart.map((product, index) => (
-          <div key={index} className="row mb-3">
-            <div className="col">
-              <ProductCardCart
-                image={product.image}
-                ProductName={product.name}
-                ProductDes={product.description || product.Description}
-                ProductPage={product.link}
-                deleteItem={handleDeleteItem}
-                onClick={() => handleProductClick(product.link)} // Handle click for navigation
-              />
+        {cart.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          cart.map((product, index) => (
+            <div key={index} className="row mb-3">
+              <div className="col">
+                <ProductCardCart
+                  image={product.image}
+                  name={product.name}
+                  description={product.description}
+                  link={product.link}
+                  removeItem={removeItem}
+                  updateItemNumber={updateItemNumber}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <Footer />
     </div>

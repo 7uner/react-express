@@ -1,71 +1,45 @@
-function ProductCard({
-  image,
-  ProductName,
-  ProductDes,
-  ProductPage,
-  addToCart,
-<<<<<<< Updated upstream
-}) {
-=======
-  itemInCart,
-  cartNum,
-  ProductPage,
-  deleteItem
-}) {
-  // Hook for displaying if an item was already added to the cart
-  const [added, setAdded] = useState(false);
-  const navigate = useNavigate();
+import React, { useState } from 'react';
 
->>>>>>> Stashed changes
+function ProductCardCart({ image, name, description, link, removeItem, updateItemNumber }) {
+  const [itemNumber, setItemNumber] = useState(1);
+
+  const handleItemNumberChange = (event) => {
+    const newItemNumber = parseInt(event.target.value);
+    setItemNumber(newItemNumber);
+    updateItemNumber(name, newItemNumber);
+  };
+
   return (
     <div className="card mb-3">
-      <img src={image} className="card-img-top" alt="product" />
+      <img src={image} className="card-img-top" alt={name} />
       <div className="card-body">
-        <h5 className="card-title">{ProductName}</h5>
-        <p className="card-text">{ProductDes}</p>
+        <h5 className="card-title">{name}</h5>
+        <p className="card-text">{description}</p>
         <div>
-<<<<<<< Updated upstream
-          <a href={ProductPage} className="btn btn-primary m-2">
+          <a href={link} className="btn btn-primary m-2">
             See More
           </a>
-          <a onClick={addToCart} className="btn btn-primary m-2">
-            Add to Cart
-          </a>
-=======
-          <button
-            onClick={() => {
-              navigate('/product', {
-                state: { itc: itemInCart, cn: cartNum, id: ProductID },
-              });
-            }}
-            className="btn btn-primary m-2"
+          <select
+            value={itemNumber}
+            onChange={handleItemNumberChange}
+            className="form-select m-2"
           >
-            See More
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+          </select>
+          <button
+            onClick={() => removeItem(name)}
+            className="btn btn-danger m-2"
+          >
+            Remove
           </button>
-          {addToCart && (
-            <button
-              onClick={() => {
-                addToCart(ProductName);
-                setAdded(true);
-              }}
-              className="btn btn-primary m-2"
-            >
-              {added ? 'Added to cart!' : 'Add to Cart'}
-            </button>
-          )}
-          {deleteItem && (
-            <button
-              onClick={() => deleteItem(ProductName)}
-              className="btn btn-danger m-2"
-            >
-              Remove
-            </button>
-          )}
->>>>>>> Stashed changes
         </div>
       </div>
     </div>
   );
 }
 
-export default ProductCard;
+export default ProductCardCart;
