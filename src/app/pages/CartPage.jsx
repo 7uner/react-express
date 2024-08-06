@@ -1,17 +1,15 @@
-<<<<<<< Updated upstream
-import Cart from '../components/Cart/Cart';
-
-function CartPage({ image, ProductName, ProductDes, ProductPage }) {
-  return (
-    <div>
-      <Cart />
-=======
+import NavBar from '../components/NavBar/NavBar';
+import Footer from '../components/Footer/Footer';
+import ProductCardCart from '../components/ProductCard/ProductCardCart';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import Cart from '../components/Cart/Cart';
 
 function CartPage() {
   const { state } = useLocation();
   const history = useHistory();
 
+  // Default cart items if state is undefined
   const defaultCartItems = [
     { 
       name: 'Product 1', 
@@ -27,15 +25,18 @@ function CartPage() {
     },
   ];
 
+  // Use state hooks for cart and number of items
   const [cart, setCart] = useState(state?.itc || defaultCartItems);
   const [numCartItems, setNumCartItems] = useState(cart.length);
 
+  // Delete event handler
   function handleDeleteItem(productName) {
     const updatedCart = cart.filter((product) => product.name !== productName);
     setCart(updatedCart);
     setNumCartItems(updatedCart.length);
   }
 
+  // Handle navigation to product page
   function handleProductClick(link) {
     history.push(link);
   }
@@ -43,6 +44,7 @@ function CartPage() {
   return (
     <div>
       <NavBar cartNum={numCartItems} itemInCart={cart} />
+      <Cart />
       <div className="container">
         {cart.map((product, index) => (
           <div key={index} className="row mb-3">
@@ -60,7 +62,6 @@ function CartPage() {
         ))}
       </div>
       <Footer />
->>>>>>> Stashed changes
     </div>
   );
 }

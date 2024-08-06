@@ -3,28 +3,6 @@ import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
-<<<<<<< Updated upstream
-
-function Home() {
-  const product = {
-    name: 'iPhone 14',
-    image: 'src/app/Assets/iPhone14.jpg',
-    Description: 'Last Gen, Just as Good, fraction of the price',
-    link: '#',
-  };
-
-  const productList = [
-    {
-      name: 'iPhone 14',
-      image: 'src/app/Assets/iPhone14.jpg',
-      Description: 'Last Gen, Just as Good, fraction of the price',
-      link: '#',
-    },
-  ];
-
-  function addToCart() {
-    alert('added to Carat!');
-=======
 import productList from '../data/productList'; // Use the appropriate product list
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -42,6 +20,14 @@ function Home() {
   // Hook for adding products to cart list
   const [cart, setCart] = useState(state ? state.itc : []);
 
+  // Example product object for demonstration
+  const exampleProduct = {
+    name: 'iPhone 14',
+    image: 'src/app/Assets/iPhone14.jpg',
+    Description: 'Last Gen, Just as Good, fraction of the price',
+    link: '#',
+  };
+
   // Function handler to add product to cart
   function handleAddToCart(ProductName) {
     // Add our item to the cart list, update state
@@ -55,12 +41,16 @@ function Home() {
         setShow(false);
       }
     }
->>>>>>> Stashed changes
+  }
+
+  // Simple alert function for demonstration
+  function addToCart() {
+    alert('Added to Cart!');
   }
 
   return (
     <div>
-      <NavBar />
+      <NavBar cartNum={NumCartItems} itemInCart={cart} />
       <div className="container text-center">
         <div className="row">
           <h1 className="display-2">
@@ -75,9 +65,7 @@ function Home() {
             <ProductCard
               image={'src/app/Assets/MacBookPro.jpg'}
               ProductName={'Mac Book Pro 15th Gen'}
-              ProductDes={
-                'Get the latest Mac Book Pro with the Powerful M2 Chip!'
-              }
+              ProductDes={'Get the latest Mac Book Pro with the Powerful M2 Chip!'}
               ProductPage={'#'}
               addToCart={addToCart}
             />
@@ -104,23 +92,23 @@ function Home() {
             <ProductCard
               image={'src/app/Assets/AirPodsMax.jpg'}
               ProductName={'Air Pods Max'}
-              ProductDes={'these wont fall out of your ears!'}
+              ProductDes={'These won’t fall out of your ears!'}
               ProductPage={'#'}
             />
           </div>
           <div className="col-4">
             <ProductCard
-              image={product.image}
-              ProductName={product.name}
-              ProductDes={product.Description}
-              ProductPage={product.link}
+              image={exampleProduct.image}
+              ProductName={exampleProduct.name}
+              ProductDes={exampleProduct.Description}
+              ProductPage={exampleProduct.link}
             />
           </div>
           <div className="col-4">
             <ProductCard
               image={'src/app/Assets/AirPodsMax.jpg'}
               ProductName={'Air Pods Max'}
-              ProductDes={'these wont fall out of your ears!'}
+              ProductDes={'These won’t fall out of your ears!'}
               ProductPage={'#'}
             />
           </div>
@@ -132,18 +120,11 @@ function Home() {
                 image={product.image}
                 ProductName={product.name}
                 ProductDes={product.Description}
-<<<<<<< Updated upstream
-                ProductPage={product.link}
-=======
-                ProductID={product.id}
                 ProductPage={product.link}
                 addToCart={() => {
                   handleAddToCart(product.name);
                   alert('Added to Cart!');
                 }}
-                itemInCart={state ? state.itc : []}
-                cartNum={state ? state.cn : 0}
->>>>>>> Stashed changes
               />
             </div>
           ))}
