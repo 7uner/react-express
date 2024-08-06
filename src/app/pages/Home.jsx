@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import ProductCard from '../components/ProductCard/ProductCard';
 import ProductCarousel from '../components/ProductCarousel/ProductCarousel';
+<<<<<<< Updated upstream
 
 function Home() {
   const product = {
@@ -23,7 +24,40 @@ function Home() {
 
   function addToCart() {
     alert('added to Carat!');
+=======
+import productList from '../data/productList'; // Use the appropriate product list
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function Home() {
+  // Location for preserving global data
+  const { state } = useLocation();
+  
+  // Hook for the display of the number of items in the cart
+  const [NumCartItems, setNumCartItems] = useState(state ? state.cn : 0);
+  
+  // Hook for cart item title display
+  const [show, setShow] = useState(true);
+  
+  // Hook for adding products to cart list
+  const [cart, setCart] = useState(state ? state.itc : []);
+
+  // Function handler to add product to cart
+  function handleAddToCart(ProductName) {
+    // Add our item to the cart list, update state
+    const productToAdd = productList.find((obj) => obj.name === ProductName);
+
+    if (productToAdd) {
+      setCart([...cart, productToAdd]);
+      setNumCartItems(NumCartItems + 1);
+
+      if (NumCartItems + 1 >= 5) {
+        setShow(false);
+      }
+    }
+>>>>>>> Stashed changes
   }
+
   return (
     <div>
       <NavBar />
@@ -98,7 +132,18 @@ function Home() {
                 image={product.image}
                 ProductName={product.name}
                 ProductDes={product.Description}
+<<<<<<< Updated upstream
                 ProductPage={product.link}
+=======
+                ProductID={product.id}
+                ProductPage={product.link}
+                addToCart={() => {
+                  handleAddToCart(product.name);
+                  alert('Added to Cart!');
+                }}
+                itemInCart={state ? state.itc : []}
+                cartNum={state ? state.cn : 0}
+>>>>>>> Stashed changes
               />
             </div>
           ))}

@@ -3,14 +3,14 @@ function FeedbackForm() {
     <form action="javascript:alert('Thanks!')">
       <div>
         <label>Name:</label>
-        <input id="name" name="name" type="text"></input>
+        <input id="name" name="name" type="text" />
       </div>
       <div>
         <label>Feedback:</label>
-        <input id="feedback" name="feedback" type="text"></input>
+        <input id="feedback" name="feedback" type="text" />
       </div>
       <div>
-        <input id="submit" type="submit"></input>
+        <input id="submit" type="submit" />
       </div>
     </form>
   );
