@@ -139,21 +139,17 @@ const productList = [
     link: '#',
     price: 1289.99,
     features: [
-      `STRIKINGLY THIN DESIGN — The redesigned MacBook Air is more portable than ever and weighs just 2.7 pounds. 
-    It’s the incredibly capable laptop that lets you work, play or create just about anything — anywhere`,
-      `SUPERCHARGED BY M2 — Get more done faster with a next-generation 8-core CPU, up to 10-core GPU and up to 24GB of unified memory.`,
-      `UP TO 18 HOURS OF BATTERY LIFE — Go all day and into the night, thanks to the power-efficient performance of the Apple M2 chip.`,
+      `iPhone 15 Pro is the first iPhone to feature an aerospace‑grade titanium design, using the same alloy that spacecraft use for missions to Mars`,
+      `Titanium has one of the best strength‑to‑weight ratios of any metal, making these our lightest Pro models ever. You’ll notice the difference the moment you pick one up.`,
+      `A17 Pro is an entirely new class of iPhone chip that delivers our best graphics performance by far.`,
+      `Mobile games will look and feel so immersive, with incredibly detailed environments and more realistic characters. And with industry-leading speed and efficiency, A17 Pro takes fast and runs with it.`,
     ],
     gallery: [
-      'src/app/Assets/2022MacBookAir/MacBookAir (1).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (2).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (3).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (4).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (5).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (6).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (7).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (8).jpg',
-      'src/app/Assets/2022MacBookAir/MacBookAir (9).jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_1.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_2.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_3.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_4.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_5.jpg',
     ],
     options: {
       Storage: [
@@ -167,8 +163,8 @@ const productList = [
         ['Starlight', 120],
       ],
       Configuration: [
-        ['M2 8 Core', 0],
-        ['M2 10 Core', 800],
+        ['A17 Bionic', 0],
+        ['A17 Pro', 800],
       ],
     },
   },
@@ -178,6 +174,36 @@ const productList = [
     image: 'src/app/Assets/iPhone14.jpg',
     Description: 'Last Gen but still packs a punch!',
     link: '#',
+    price: 989.99,
+    features: [
+      `iPhone 15 Pro is the first iPhone to feature an aerospace‑grade titanium design, using the same alloy that spacecraft use for missions to Mars`,
+      `Titanium has one of the best strength‑to‑weight ratios of any metal, making these our lightest Pro models ever. You’ll notice the difference the moment you pick one up.`,
+      `A17 Pro is an entirely new class of iPhone chip that delivers our best graphics performance by far.`,
+      `Mobile games will look and feel so immersive, with incredibly detailed environments and more realistic characters. And with industry-leading speed and efficiency, A17 Pro takes fast and runs with it.`,
+    ],
+    gallery: [
+      'src/app/Assets/iphone15Pro/iphone15Pro_1.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_2.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_3.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_4.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_5.jpg',
+    ],
+    options: {
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 300],
+        ['1 TB', 800],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Midnight', 100],
+        ['Starlight', 120],
+      ],
+      Configuration: [
+        ['A16 Bionic', 0],
+        ['A16 Pro', 800],
+      ],
+    },
   },
   {
     id: '005',
@@ -185,6 +211,36 @@ const productList = [
     image: 'src/app/Assets/AirPodsMax.jpg',
     Description: 'these wont fall out of your ears!',
     link: '#',
+    price: 989.99,
+    features: [
+      `iPhone 15 Pro is the first iPhone to feature an aerospace‑grade titanium design, using the same alloy that spacecraft use for missions to Mars`,
+      `Titanium has one of the best strength‑to‑weight ratios of any metal, making these our lightest Pro models ever. You’ll notice the difference the moment you pick one up.`,
+      `A17 Pro is an entirely new class of iPhone chip that delivers our best graphics performance by far.`,
+      `Mobile games will look and feel so immersive, with incredibly detailed environments and more realistic characters. And with industry-leading speed and efficiency, A17 Pro takes fast and runs with it.`,
+    ],
+    gallery: [
+      'src/app/Assets/iphone15Pro/iphone15Pro_1.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_2.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_3.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_4.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_5.jpg',
+    ],
+    options: {
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 300],
+        ['1 TB', 800],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Midnight', 100],
+        ['Starlight', 120],
+      ],
+      Configuration: [
+        ['A16 Bionic', 0],
+        ['A16 Pro', 800],
+      ],
+    },
   },
   {
     id: '006',
@@ -192,6 +248,36 @@ const productList = [
     image: 'src/app/Assets/apple watch.jpg',
     Description: 'Get the apple watch to pair with your iphone!',
     link: '#',
+    price: 989.99,
+    features: [
+      `iPhone 15 Pro is the first iPhone to feature an aerospace‑grade titanium design, using the same alloy that spacecraft use for missions to Mars`,
+      `Titanium has one of the best strength‑to‑weight ratios of any metal, making these our lightest Pro models ever. You’ll notice the difference the moment you pick one up.`,
+      `A17 Pro is an entirely new class of iPhone chip that delivers our best graphics performance by far.`,
+      `Mobile games will look and feel so immersive, with incredibly detailed environments and more realistic characters. And with industry-leading speed and efficiency, A17 Pro takes fast and runs with it.`,
+    ],
+    gallery: [
+      'src/app/Assets/iphone15Pro/iphone15Pro_1.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_2.webp',
+      'src/app/Assets/iphone15Pro/iphone15Pro_3.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_4.jpg',
+      'src/app/Assets/iphone15Pro/iphone15Pro_5.jpg',
+    ],
+    options: {
+      Storage: [
+        ['256 GB', 0],
+        ['512 GB', 300],
+        ['1 TB', 800],
+      ],
+      Colour: [
+        ['Silver', 0],
+        ['Midnight', 100],
+        ['Starlight', 120],
+      ],
+      Configuration: [
+        ['A16 Bionic', 0],
+        ['A16 Pro', 800],
+      ],
+    },
   },
 ];
 
