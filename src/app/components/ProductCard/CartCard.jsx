@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 function CartCard({ img, name, des, price, shipping, quantity, handleDelete }) {
   const [qty, setQty] = useState(quantity ? quantity : 1);
+  const [display, setDisplay] = useState(true);
 
   return (
     <div>
@@ -24,11 +25,34 @@ function CartCard({ img, name, des, price, shipping, quantity, handleDelete }) {
                   aria-label="Default select example"
                   defaultValue={qty}
                   onChange={(e) => setQty(e.target.value)}
+                  style={{
+                    visibility: display ? 'visible' : 'hidden',
+                    display: display ? 'inline' : 'none',
+                  }}
                 >
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
                 </select>
+                <input
+                  className="form-control w-25 h-75 align-self-center m-2"
+                  style={{
+                    visibility: display ? 'hidden' : 'visible',
+                    display: display ? 'none' : 'inline',
+                  }}
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setQty(e.target.value);
+                  }}
+                ></input>
+                <a
+                  className="btn btn-primary m-1"
+                  onClick={() => {
+                    setDisplay(!display);
+                  }}
+                >
+                  +
+                </a>
                 <a
                   className="btn btn-primary m-1"
                   onClick={() => {

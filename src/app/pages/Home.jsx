@@ -20,7 +20,7 @@ function Home() {
     // set a flag to denote if we made any changes during the mapping
     var changed = false;
     // map through the producct list to see if the product being added is already there
-    const nextProducts = cart.map((product, i) => {
+    const nextProducts = cart.map((product) => {
       if (product.name === productName) {
         // product exsists, update quantity and set changed to true
         changed = true;
