@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import CartPage from './pages/CartPage';
 import TestPage from './pages/TestPage';
+import TestPage1 from './pages/testpage1';
+import SeeMore from './components/ProductCard/SeeMore';
 
 function App() {
   return (
@@ -22,6 +24,14 @@ function App() {
 
       <Routes>
         <Route path="/test" element={<TestPage />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/seeMore" element={<seeMore />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/test1" element={<TestPage1 />} />
       </Routes>
     </Router>
   );

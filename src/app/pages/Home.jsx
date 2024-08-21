@@ -47,6 +47,7 @@ function Home() {
                 ProductName={product.name}
                 ProductPage={product.link}
                 addToCart={handleAddToCart}
+                seeMore={seeMore}
               />
             </div>
           ))}
