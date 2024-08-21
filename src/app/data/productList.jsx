@@ -245,7 +245,7 @@ const productList = [
   {
     id: '006',
     name: 'Apple Watch',
-    image: 'src/app/Assets/apple watch.jpg',
+    image: 'src/app/Assets/react.webp',
     Description: 'Get the apple watch to pair with your iphone!',
     link: '#',
     price: 989.99,

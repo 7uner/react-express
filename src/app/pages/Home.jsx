@@ -49,7 +49,7 @@ function Home() {
       <ProductBar />
       <div className="container text-center">
         <div className="row">
-          <h1 className="display-2">
+          <h1 className="display-2 animate__animated animate__bounce">
             Find the Latest Tech for the Best Price!
           </h1>
         </div>
@@ -58,7 +58,7 @@ function Home() {
         </div>
         <div className="row">
           {productList.map((product, i) => (
-            <div className="col-4" key={i}>
+            <div className="col-4 ani_bounce" key={i}>
               <ProductCard
                 image={product.image}
                 ProductDes={product.Description}
