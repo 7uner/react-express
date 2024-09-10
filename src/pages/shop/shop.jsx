@@ -1,20 +1,21 @@
-import React from "react";
-import { PRODUCTS } from "../../products";
+
+import React, { useContext } from "react";
+import { ShopContext } from "../../context/shop-context";
 import { Product } from "./product";
-import "./shop.css";
 
-export const Shop = () => {
+const Shop = () => {
+  const { PRODUCTS } = useContext(ShopContext);
+
   return (
-    <div className="shop">
-      <div className="shopTitle">
-        <h1>PedroTech Shop</h1>
-      </div>
-
-      <div className="products">
+    <div style={{ textAlign: "center", padding: "50px" }}>
+      <h1 style={{ fontSize: "36px", marginBottom: "40px" }}>Daisy's Shop</h1>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
         {PRODUCTS.map((product) => (
-          <Product data={product} />
+          <Product key={product.id} data={product} />
         ))}
       </div>
     </div>
   );
 };
+
+export default Shop;

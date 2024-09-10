@@ -1,3 +1,4 @@
+// src/products.js
 import product1 from "./assets/products/1.png";
 import product2 from "./assets/products/2.png";
 import product3 from "./assets/products/3.png";
