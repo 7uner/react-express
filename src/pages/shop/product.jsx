@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
 
-export const Product = (props) => {
-  const { id, productName, price, productImage } = props.data;
+export const Product = (item) => {
+  const { id, productName, price, productImage } = item.data;
   const { addToCart, cartItems } = useContext(ShopContext);
 
-  const cartItemCount = cartItems[id] || 0;
+  const count = cartItems[id] ?? 0;
 
   return (
     <div style={{
@@ -15,6 +15,7 @@ export const Product = (props) => {
       border: "1px solid #ccc",
       borderRadius: "10px",
       textAlign: "center",
+      fontFamily: "Arial" 
     }}>
       <img src={productImage} alt={productName} style={{ width: "100%", borderRadius: "10px" }} />
       <div>
@@ -33,7 +34,7 @@ export const Product = (props) => {
           cursor: "pointer",
         }}
       >
-        Add To Cart {cartItemCount > 0 && `(${cartItemCount})`}
+        Add To Cart {count > 0 && `(${count})`}
       </button>
     </div>
   );

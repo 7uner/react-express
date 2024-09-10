@@ -10,7 +10,7 @@ export const Cart = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "50px" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "50px", fontFamily: "Arial"  }}>
       <h1>Your Cart Items</h1>
       <div style={{ display: "flex", flexDirection: "column", gap: "20px", width: "100%", alignItems: "center" }}>
         {PRODUCTS.map((product) => {
