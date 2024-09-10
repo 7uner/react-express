@@ -8,7 +8,7 @@ export const Contact = () => {
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
               <input 
-                type="email" 
+                type="email" git branch
                 className="form-control" 
                 id="exampleInputEmail1" 
                 aria-describedby="emailHelp" 
