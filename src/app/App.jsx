@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import CartPage from './pages/CartPage';
 import TestPage from './pages/TestPage';
+import Feedback from './pages/Feedback';
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
 
       <Routes>
         <Route path="/test" element={<TestPage />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/form" element={<Feedback />} />
       </Routes>
     </Router>
   );
