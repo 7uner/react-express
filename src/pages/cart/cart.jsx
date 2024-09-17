@@ -1,5 +1,4 @@
-
-import React, { useContext } from "react";
+import { useContext } from 'react';
 import { ShopContext } from "../../context/shop-context";
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +28,6 @@ export const Cart = () => {
               padding: "10px 20px",
               backgroundColor: "black",
               color: "white",
-              border: "none",
               borderRadius: "8px",
               cursor: "pointer",
               marginRight: "10px",
@@ -46,7 +44,6 @@ export const Cart = () => {
               padding: "10px 20px",
               backgroundColor: "rgb(19, 19, 19)",
               color: "white",
-              border: "none",
               borderRadius: "8px",
               cursor: "pointer",
             }}

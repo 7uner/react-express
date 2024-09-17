@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from 'react';
 import { ShopContext } from "../../context/shop-context";
 
 export const Product = (item) => {
@@ -29,7 +29,6 @@ export const Product = (item) => {
           padding: "10px",
           backgroundColor: "black",
           color: "white",
-          border: "none",
           borderRadius: "8px",
           cursor: "pointer",
         }}
